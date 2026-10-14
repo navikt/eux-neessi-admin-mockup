@@ -1,0 +1,48 @@
+kind: Application
+apiVersion: nais.io/v1alpha1
+metadata:
+  name: {{ name }}
+  namespace: eessibasis
+  labels:
+    team: eessibasis
+spec:
+  image: {{ image }}
+  port: 3000
+  ingresses:
+    - {{ ingress.intern }}
+  env:
+    - name: NEXT_PUBLIC_ENV
+      value: {{ env.label }}
+    - name: NODE_ENV
+      value: production
+  liveness:
+    path: /api/internal/health/live
+    port: 3000
+    initialDelay: 20
+    timeout: 5
+    periodSeconds: 10
+    failureThreshold: 6
+  readiness:
+    path: /api/internal/health/ready
+    port: 3000
+    initialDelay: 10
+    timeout: 5
+    periodSeconds: 10
+    failureThreshold: 6
+  prometheus:
+    enabled: true
+    path: /api/internal/metrics
+  replicas:
+    min: {{ replicas.min }}
+    max: {{ replicas.max }}
+    cpuThresholdPercentage: 80
+  resources:
+    limits:
+      memory: {{ resources.limits.memory }}
+    requests:
+      cpu: {{ resources.requests.cpu }}
+      memory: {{ resources.requests.memory }}
+  observability:
+    autoInstrumentation:
+      enabled: true
+      runtime: nodejs

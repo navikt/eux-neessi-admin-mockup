@@ -39,3 +39,8 @@ yarn-error.log*
 /coverage
 
 .eslintcache
+
+# next.js
+.next
+next-env.d.ts
+*.tsbuildinfo

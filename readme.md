@@ -141,3 +141,15 @@ The app is built on GitHub and runs on **Nais**, the same way as the portal in `
 * **Access:** the repo is authorized to deploy to Nais in the `eessibasis` team
 * **App:** a Next.js app with a Dockerfile and health/metrics endpoints (`/api/internal/health/live`,
   `/api/internal/health/ready`, `/api/internal/metrics`)
+
+## Developing locally
+
+```sh
+pnpm install
+pnpm dev          # http://localhost:3000 – pick any persona on the login screen
+pnpm typecheck && pnpm lint && pnpm build
+```
+
+All data is generated deterministically in `lib/mock/` (seeded per day), so numbers on the dashboard, *Har vi svart?*
+and *Statistikk* agree with each other. Edits in *Standardtekster* are stored in the browser's `localStorage`
+("Nullstill demo" resets them).

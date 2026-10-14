@@ -8,7 +8,7 @@ interface Props {
 }
 
 /** Minimal SVG sparkline — no chart library needed for tiny trends. */
-export function Sparkline({ data, color = "#6366f1", height = 56, width = 200, fill = true, className }: Props) {
+export function Sparkline({ data, color = "#2f6fb5", height = 56, width = 200, fill = true, className }: Props) {
   if (data.length < 2) return null;
   const min = Math.min(...data);
   const max = Math.max(...data);

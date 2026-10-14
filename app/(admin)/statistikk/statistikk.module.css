@@ -1,7 +1,12 @@
-.heroBtn {
-  background: rgba(255, 255, 255, 0.14) !important;
-  color: #fff !important;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) !important;
+/* Opaque backing so the hero star ring doesn't show through the transparent secondary button. */
+.heroAction {
+  display: inline-flex;
+  border-radius: var(--ax-radius-8, 8px);
+  background: var(--card-bg);
+}
+
+.noWrapToggle :global(.aksel-toggle-group__button-inner) {
+  white-space: nowrap;
 }
 
 .mapCard {
@@ -44,9 +49,9 @@
 .insight {
   margin: 16px 0 0;
   padding: 12px 14px;
-  border-radius: 12px;
-  background: color-mix(in srgb, #6366f1 9%, transparent);
-  border-left: 3px solid #6366f1;
+  border-radius: 8px;
+  background: color-mix(in srgb, #2f6fb5 7%, transparent);
+  border-left: 2px solid #2f6fb5;
   font-size: 0.9rem;
   line-height: 1.5;
 }
@@ -64,7 +69,7 @@
   padding: 7px 8px;
   border: 0;
   background: transparent;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
   color: inherit;
   font: inherit;
@@ -73,7 +78,7 @@
 }
 
 .rankRow:hover {
-  background: var(--surface-hover, rgba(99, 102, 241, 0.08));
+  background: color-mix(in srgb, var(--brand-a) 7%, transparent);
 }
 
 .rankNo {
@@ -94,7 +99,7 @@
   height: 8px;
   border-radius: 999px;
   overflow: hidden;
-  background: var(--track, rgba(148, 163, 184, 0.18));
+  background: var(--track, rgba(154, 161, 171, 0.18));
 }
 
 .rankBar > span {
@@ -105,16 +110,16 @@
 .rankNum {
   text-align: right;
   font-variant-numeric: tabular-nums;
-  font-weight: 650;
+  font-weight: 600;
   font-size: 0.85rem;
 }
 
 .allLine :global(.recharts-curve) {
-  stroke: var(--text, #0f172a);
+  stroke: var(--ax-text-neutral);
 }
 
-:global(html.dark) .allLine :global(.recharts-curve) {
-  stroke: #e2e8f0;
+.allLine :global(.recharts-dot) {
+  stroke: var(--ax-text-neutral);
 }
 
 .bigFact {
@@ -124,13 +129,11 @@
 }
 
 .bigFactValue {
-  font-size: 2.6rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  background: linear-gradient(120deg, #10b981, #0ea5e9);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  font-size: 2.4rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ax-text-success);
   line-height: 1.1;
 }
 
@@ -173,7 +176,7 @@
   flex: 1;
   height: 10px;
   border-radius: 999px;
-  background: var(--track, rgba(148, 163, 184, 0.18));
+  background: var(--track, rgba(154, 161, 171, 0.18));
   overflow: hidden;
 }
 
@@ -181,14 +184,14 @@
   display: block;
   height: 100%;
   border-radius: 999px;
-  background: linear-gradient(90deg, #6366f1, #0ea5e9);
+  background: #2f6fb5;
 }
 
 .onTime {
   display: inline-block;
-  padding: 3px 10px;
-  border-radius: 999px;
-  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-weight: 600;
   font-size: 0.85rem;
   font-variant-numeric: tabular-nums;
   color: var(--c);
@@ -196,7 +199,7 @@
 }
 
 .heat {
-  --heat-empty: rgba(148, 163, 184, 0.12);
+  --heat-empty: rgba(154, 161, 171, 0.12);
   display: grid;
   grid-template-columns: 36px repeat(24, 1fr);
   gap: 3px;
@@ -234,7 +237,7 @@
   width: 120px;
   height: 8px;
   border-radius: 999px;
-  background: linear-gradient(90deg, rgba(148, 163, 184, 0.15), #6366f1);
+  background: linear-gradient(90deg, rgba(154, 161, 171, 0.15), #2f6fb5);
 }
 
 @media (max-width: 800px) {

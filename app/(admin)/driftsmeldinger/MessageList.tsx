@@ -74,7 +74,7 @@ export function MessageList({ messages, now, tab, onTabChange, highlightId, onDe
                 <motion.span
                   key={counts[t.value]}
                   className={`${styles.tabCount} ${t.value === "aktive" && counts.aktive > 0 ? styles.tabCountLive : ""}`}
-                  initial={{ scale: 1.5 }}
+                  initial={{ scale: 1.15 }}
                   animate={{ scale: 1 }}
                 >
                   {counts[t.value]}
@@ -150,7 +150,7 @@ function MessageItem({
             <Tag size="xsmall" variant="moderate" data-color={sev.tag}>
               {sev.label}
             </Tag>
-            <Tag size="xsmall" variant={msg.status === "aktiv" ? "strong" : "outline"} data-color={st.tag}>
+            <Tag size="xsmall" variant={msg.status === "aktiv" ? "moderate" : "outline"} data-color={st.tag}>
               {msg.status === "aktiv" ? <span className={`dot dot--ok dot--pulse ${styles.tagDot}`} /> : null}
               {st.label}
             </Tag>

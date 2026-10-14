@@ -177,8 +177,8 @@ export function SlettUsendteSaker({ tool, onRunComplete }: ToolComponentProps) {
                   <motion.tr
                     key={c.rinasakId}
                     className={styles.motionRow}
-                    initial={{ opacity: 0, backgroundColor: "rgba(244,63,94,0.18)" }}
-                    animate={{ opacity: 1, backgroundColor: "rgba(244,63,94,0)" }}
+                    initial={{ opacity: 0, backgroundColor: "rgba(196, 80, 92,0.18)" }}
+                    animate={{ opacity: 1, backgroundColor: "rgba(196, 80, 92,0)" }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.5 }}
                   >

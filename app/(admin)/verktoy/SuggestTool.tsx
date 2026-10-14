@@ -22,12 +22,12 @@ export function SuggestToolCard({ suggestions, onOpen, compact }: { suggestions:
       className={styles.suggestCard}
       data-compact={compact}
       onClick={onOpen}
-      whileHover={compact ? { x: 3 } : { y: -4 }}
+      whileHover={compact ? { x: 2 } : { y: -2 }}
       transition={{ type: "spring", stiffness: 320, damping: 30 }}
     >
       <motion.span
         className={styles.suggestIcon}
-        animate={{ rotate: [0, -8, 8, 0] }}
+        animate={{ rotate: [0, -6, 6, 0] }}
         transition={{ duration: 2.8, repeat: Infinity, repeatDelay: 2.5 }}
       >
         <LightBulbIcon aria-hidden />
@@ -82,7 +82,7 @@ export function SuggestToolModal({
         onClose();
         reset();
       }}
-      header={{ heading: "Foreslå nytt verktøy", icon: <LightBulbIcon aria-hidden color="#f59e0b" /> }}
+      header={{ heading: "Foreslå nytt verktøy", icon: <LightBulbIcon aria-hidden color="#c98a2b" /> }}
       width={560}
       closeOnBackdropClick
     >

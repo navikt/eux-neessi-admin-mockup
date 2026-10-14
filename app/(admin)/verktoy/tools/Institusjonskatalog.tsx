@@ -100,7 +100,7 @@ export function Institusjonskatalog({ tool, onRunComplete }: ToolComponentProps)
                 className={styles.flagCell}
                 data-done={isDone}
                 data-current={current === c.code}
-                animate={current === c.code ? { scale: 1.25, y: -3 } : { scale: 1, y: 0 }}
+                animate={current === c.code ? { scale: 1.1, y: -2 } : { scale: 1, y: 0 }}
                 transition={{ type: "spring", stiffness: 400, damping: 18 }}
                 title={c.name}
               >
@@ -179,9 +179,9 @@ export function Institusjonskatalog({ tool, onRunComplete }: ToolComponentProps)
                       </Table.DataCell>
                       <Table.DataCell>
                         <div className={styles.stackBar} style={{ width: `${(sum / max) * 100}%` }}>
-                          <span style={{ flex: r.added, background: "#10b981" }} />
-                          <span style={{ flex: r.changed, background: "#f59e0b" }} />
-                          <span style={{ flex: r.removed, background: "#f43f5e" }} />
+                          <span style={{ flex: r.added, background: "#3a8a5f" }} />
+                          <span style={{ flex: r.changed, background: "#c98a2b" }} />
+                          <span style={{ flex: r.removed, background: "#c4505c" }} />
                         </div>
                       </Table.DataCell>
                     </Table.Row>

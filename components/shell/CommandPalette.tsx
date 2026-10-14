@@ -102,7 +102,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
               return (
                 <div key={c.id}>
                   {header ? (
-                    <div style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--muted)", padding: "10px 12px 4px" }}>
+                    <div style={{ fontSize: "0.72rem", fontWeight: 650, letterSpacing: "0.09em", textTransform: "uppercase", color: "var(--muted)", padding: "10px 12px 4px" }}>
                       {header}
                     </div>
                   ) : null}
@@ -120,16 +120,16 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
                       alignItems: "center",
                       gap: 12,
                       padding: "10px 12px",
-                      borderRadius: 12,
+                      borderRadius: 10,
                       border: "none",
                       textAlign: "left",
                       cursor: "pointer",
                       font: "inherit",
                       color: "inherit",
-                      background: i === index ? "color-mix(in srgb, var(--brand-a) 12%, transparent)" : "transparent",
+                      background: i === index ? "color-mix(in srgb, var(--brand-a) 8%, transparent)" : "transparent",
                     }}
                   >
-                    <span style={{ width: 34, height: 34, borderRadius: 10, display: "grid", placeItems: "center", background: "var(--ax-bg-neutral-soft)", fontSize: "1.15rem" }}>
+                    <span style={{ width: 34, height: 34, borderRadius: 9, display: "grid", placeItems: "center", background: "var(--ax-bg-neutral-soft)", border: "1px solid var(--hairline)", color: "var(--muted)", fontSize: "1.15rem" }}>
                       <c.icon aria-hidden />
                     </span>
                     <span style={{ minWidth: 0 }}>

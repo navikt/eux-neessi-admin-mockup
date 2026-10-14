@@ -30,7 +30,7 @@ export function scaleColor(t: number, palette: [string, string, string]): string
   return c < 0.5 ? mix(palette[0], palette[1], c * 2) : mix(palette[1], palette[2], (c - 0.5) * 2);
 }
 
-export function EuropeMap({ map, values, palette = ["#c7d2fe", "#6366f1", "#312e81"], selected, onSelect, tooltip, flows = 0, height }: Props) {
+export function EuropeMap({ map, values, palette = ["#c3d6ee", "#2f6fb5", "#1f3550"], selected, onSelect, tooltip, flows = 0, height }: Props) {
   const [hover, setHover] = useState<{ code: CountryCode; x: number; y: number } | null>(null);
   const max = useMemo(() => Math.max(1, ...Object.values(values).map((v) => v ?? 0)), [values]);
 
@@ -55,7 +55,7 @@ export function EuropeMap({ map, values, palette = ["#c7d2fe", "#6366f1", "#312e
       >
         <defs>
           <radialGradient id="sea" cx="50%" cy="40%" r="75%">
-            <stop offset="0%" stopColor="color-mix(in srgb, #6366f1 7%, transparent)" />
+            <stop offset="0%" stopColor="color-mix(in srgb, #2f6fb5 7%, transparent)" />
             <stop offset="100%" stopColor="transparent" />
           </radialGradient>
           <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
@@ -70,7 +70,7 @@ export function EuropeMap({ map, values, palette = ["#c7d2fe", "#6366f1", "#312e
         {map.shapes.map((s) => {
           if (!s.code) return <path key={s.id} d={s.d} className="other" stroke="var(--ax-bg-default)" strokeWidth={0.6} />;
           if (s.code === "NO")
-            return <path key={s.id} d={s.d} fill="#ba1a1a" stroke="#fff" strokeWidth={0.8} opacity={0.9} />;
+            return <path key={s.id} d={s.d} fill="#c0765d" stroke="var(--ax-bg-default, #fff)" strokeWidth={0.8} opacity={0.92} />;
           const code = s.code as CountryCode;
           const v = values[code] ?? 0;
           const isSel = selected === code;
@@ -80,7 +80,7 @@ export function EuropeMap({ map, values, palette = ["#c7d2fe", "#6366f1", "#312e
               key={s.id}
               d={s.d}
               className="country"
-              fill={v ? scaleColor(Math.sqrt(v / max), palette) : "var(--ax-bg-neutral-moderate, #e5e7eb)"}
+              fill={v ? scaleColor(Math.sqrt(v / max), palette) : "var(--ax-bg-neutral-moderate, #e4e6ea)"}
               stroke={isSel ? "var(--ax-text-neutral)" : "var(--ax-bg-default, #fff)"}
               strokeWidth={isSel ? 2 : 0.7}
               opacity={dim ? 0.35 : 1}
@@ -104,7 +104,7 @@ export function EuropeMap({ map, values, palette = ["#c7d2fe", "#6366f1", "#312e
                   <motion.path
                     d={d}
                     fill="none"
-                    stroke="#f59e0b"
+                    stroke="#c0765d"
                     strokeWidth={1.6}
                     strokeLinecap="round"
                     initial={{ pathLength: 0, opacity: 0 }}
@@ -113,22 +113,22 @@ export function EuropeMap({ map, values, palette = ["#c7d2fe", "#6366f1", "#312e
                   />
                   <motion.circle
                     r={2.6}
-                    fill="#fde68a"
+                    fill="#f0d9cf"
                     filter="url(#glow)"
                     initial={{ offsetDistance: "0%" }}
                     animate={{ offsetDistance: ["0%", "100%"] }}
                     transition={{ duration: 2.4, repeat: Infinity, delay: 1.2 + i * 0.25, ease: "easeInOut" }}
                     style={{ offsetPath: `path("${d}")` }}
                   />
-                  <circle cx={p[0]} cy={p[1]} r={3} fill="#f59e0b" />
+                  <circle cx={p[0]} cy={p[1]} r={3} fill="#c0765d" />
                 </g>
               );
             })
           : null}
         {oslo ? (
           <g pointerEvents="none">
-            <motion.circle cx={oslo[0]} cy={oslo[1]} r={6} fill="none" stroke="#ffcc00" strokeWidth={2} animate={{ r: [6, 16], opacity: [0.9, 0] }} transition={{ duration: 2, repeat: Infinity }} />
-            <circle cx={oslo[0]} cy={oslo[1]} r={5} fill="#ffcc00" stroke="#0b2a7a" strokeWidth={2} />
+            <motion.circle cx={oslo[0]} cy={oslo[1]} r={6} fill="none" stroke="#c0765d" strokeWidth={1.5} animate={{ r: [6, 16], opacity: [0.9, 0] }} transition={{ duration: 2, repeat: Infinity }} />
+            <circle cx={oslo[0]} cy={oslo[1]} r={5} fill="#fff" stroke="#a35f48" strokeWidth={2.5} />
           </g>
         ) : null}
       </svg>

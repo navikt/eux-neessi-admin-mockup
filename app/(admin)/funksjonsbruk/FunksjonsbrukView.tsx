@@ -34,10 +34,10 @@ interface Props {
 
 type Period = "8" | "12" | "26";
 
-const VERDICT: Record<Verdict, { label: string; className: string }> = {
-  TAR_AV: { label: "Tar av 🚀", className: styles.verdictUp },
-  LOVENDE: { label: "Lovende ✨", className: styles.verdictMid },
-  LAV: { label: "Lav bruk ⚠️", className: styles.verdictLow },
+const VERDICT: Record<Verdict, { label: string; color: "success" | "info" | "warning"; icon: React.ReactNode }> = {
+  TAR_AV: { label: "Tar av", color: "success", icon: <TrendUpIcon aria-hidden /> },
+  LOVENDE: { label: "Lovende", color: "info", icon: <SparklesIcon aria-hidden /> },
+  LAV: { label: "Lav bruk", color: "warning", icon: <TrendFlatIcon aria-hidden /> },
 };
 
 export function FunksjonsbrukView({ data }: Props) {
@@ -289,8 +289,8 @@ export function FunksjonsbrukView({ data }: Props) {
                 <defs>
                   {categories.map((c) => (
                     <linearGradient key={c.id} id={`fb-grad-${c.id}`} x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor={c.color} stopOpacity={0.85} />
-                      <stop offset="100%" stopColor={c.color} stopOpacity={0.45} />
+                      <stop offset="0%" stopColor={c.color} stopOpacity={0.7} />
+                      <stop offset="100%" stopColor={c.color} stopOpacity={0.38} />
                     </linearGradient>
                   ))}
                 </defs>
@@ -317,7 +317,7 @@ export function FunksjonsbrukView({ data }: Props) {
                   );
                 })}
                 {focus ? (
-                  <Line type="monotone" dataKey="focus" name={focus.name} stroke="#f97316" strokeWidth={3} strokeDasharray="6 4" dot={false} className={styles.focusLine} animationDuration={700} />
+                  <Line type="monotone" dataKey="focus" name={focus.name} stroke="#c0765d" strokeWidth={2.5} strokeDasharray="6 4" dot={false} className={styles.focusLine} animationDuration={700} />
                 ) : null}
               </ComposedChart>
             </ResponsiveContainer>
@@ -325,7 +325,7 @@ export function FunksjonsbrukView({ data }: Props) {
 
           <Card title={<span className={styles.dormantTitle}><BedIcon aria-hidden /> Sovende funksjoner</span>} subtitle="Lav eller fallende bruk – trenger de et dytt, eller kan de fjernes?">
             <div className={styles.dormantList}>
-              {dormant.length === 0 ? <div className="empty">Ingen sovende funksjoner i valgt kategori 🎉</div> : null}
+              {dormant.length === 0 ? <div className="empty">Ingen sovende funksjoner i valgt kategori</div> : null}
               {dormant.map((f, i) => {
                 const c = catById[f.category];
                 return (
@@ -346,7 +346,7 @@ export function FunksjonsbrukView({ data }: Props) {
                         <span>
                           <span className="legend__swatch" style={{ background: c.color }} /> {Math.round(f.adoption * 100)} % av målgruppen
                         </span>
-                        <Sparkline data={f.wau.slice(-n)} color="#94a3b8" height={22} width={70} fill={false} className={styles.dormantSpark} />
+                        <Sparkline data={f.wau.slice(-n)} color="#9aa1ab" height={22} width={70} fill={false} className={styles.dormantSpark} />
                       </div>
                       {f.suggestion ? (
                         <div className={styles.suggestion}>
@@ -374,9 +374,9 @@ export function FunksjonsbrukView({ data }: Props) {
             key="focusbar"
             className={styles.focusBar}
             style={{ "--accent": catById[focus.category].color } as React.CSSProperties}
-            initial={{ opacity: 0, y: 40, scale: 0.92 }}
+            initial={{ opacity: 0, y: 32, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 40, scale: 0.92 }}
+            exit={{ opacity: 0, y: 32, scale: 0.97 }}
             transition={{ type: "spring", stiffness: 420, damping: 32 }}
           >
             <span className={styles.focusBarDot} />
@@ -450,8 +450,10 @@ function Spotlight({
           <span className="legend__swatch" style={{ background: color }} /> {categoryName}
         </span>
         {verdict ? (
-          <motion.span className={`${styles.verdict} ${verdict.className}`} initial={{ scale: 0.4, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ type: "spring", stiffness: 380, damping: 14, delay: 0.35 }}>
-            {verdict.label}
+          <motion.span className={styles.verdict} initial={{ scale: 0.9, opacity: 0, y: 4 }} whileInView={{ scale: 1, opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ type: "spring", stiffness: 300, damping: 26, delay: 0.35 }}>
+            <Tag size="small" variant="moderate" data-color={verdict.color} icon={verdict.icon}>
+              {verdict.label}
+            </Tag>
           </motion.span>
         ) : null}
       </div>
@@ -474,14 +476,14 @@ function Spotlight({
           <AreaChart data={curve.map((p) => ({ ...p, pct: Math.round(p.pct * 1000) / 10 }))} margin={{ top: 6, right: 4, left: -22, bottom: 0 }}>
             <defs>
               <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={color} stopOpacity={0.5} />
+                <stop offset="0%" stopColor={color} stopOpacity={0.3} />
                 <stop offset="100%" stopColor={color} stopOpacity={0.02} />
               </linearGradient>
             </defs>
             <CartesianGrid vertical={false} strokeDasharray="3 4" />
             <XAxis dataKey="label" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} interval="preserveStartEnd" />
             <YAxis tickLine={false} axisLine={false} domain={[0, 100]} ticks={[0, 50, 100]} tickFormatter={(v: number) => `${v}%`} tick={{ fontSize: 11 }} />
-            <ReferenceLine y={50} stroke="#94a3b8" strokeDasharray="4 4" />
+            <ReferenceLine y={50} stroke="#9aa1ab" strokeDasharray="4 4" />
             <Tooltip content={<ChartTooltip formatter={(v) => fmtPct(v, 1)} />} />
             <Area type="monotone" dataKey="pct" name="Andel av målgruppen" stroke={color} strokeWidth={2.5} fill={`url(#${gradId})`} dot={{ r: 3, fill: color, strokeWidth: 0 }} animationDuration={1400} />
           </AreaChart>
@@ -540,20 +542,20 @@ function OverallPanel({
         <AreaChart data={data} margin={{ top: 8, right: 6, left: -18, bottom: 0 }}>
           <defs>
             <linearGradient id="fb-wau" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#14b8a6" stopOpacity={0.45} />
-              <stop offset="100%" stopColor="#14b8a6" stopOpacity={0.02} />
+              <stop offset="0%" stopColor="#3f8f8a" stopOpacity={0.32} />
+              <stop offset="100%" stopColor="#3f8f8a" stopOpacity={0.02} />
             </linearGradient>
             <linearGradient id="fb-dau" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#6366f1" stopOpacity={0.4} />
-              <stop offset="100%" stopColor="#6366f1" stopOpacity={0.02} />
+              <stop offset="0%" stopColor="#2a6cb3" stopOpacity={0.28} />
+              <stop offset="100%" stopColor="#2a6cb3" stopOpacity={0.02} />
             </linearGradient>
           </defs>
           <CartesianGrid vertical={false} strokeDasharray="3 4" />
           <XAxis dataKey="week" tickLine={false} axisLine={false} interval="preserveStartEnd" />
           <YAxis tickLine={false} axisLine={false} />
           <Tooltip content={<ChartTooltip formatter={(v) => `${fmtInt(v)} brukere`} />} />
-          <Area type="monotone" dataKey="wau" name="WAU" stroke="#14b8a6" strokeWidth={2.5} fill="url(#fb-wau)" />
-          <Area type="monotone" dataKey="dau" name="DAU" stroke="#6366f1" strokeWidth={2} fill="url(#fb-dau)" />
+          <Area type="monotone" dataKey="wau" name="WAU" stroke="#3f8f8a" strokeWidth={2} fill="url(#fb-wau)" />
+          <Area type="monotone" dataKey="dau" name="DAU" stroke="#2a6cb3" strokeWidth={1.75} fill="url(#fb-dau)" />
         </AreaChart>
       </ResponsiveContainer>
       <div className={styles.movers}>
@@ -658,7 +660,7 @@ function FocusPanel({
         <AreaChart data={data} margin={{ top: 8, right: 6, left: -22, bottom: 0 }}>
           <defs>
             <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={color} stopOpacity={0.5} />
+              <stop offset="0%" stopColor={color} stopOpacity={0.3} />
               <stop offset="100%" stopColor={color} stopOpacity={0.02} />
             </linearGradient>
           </defs>

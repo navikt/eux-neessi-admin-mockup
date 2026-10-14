@@ -98,7 +98,7 @@ export function VersionSwimlane({ versions, instances, today, onSelect }: Props)
           <div key={v.version} className={styles.lane}>
             <div className={styles.laneLabel}>
               <div className={styles.laneVersion}>
-                <span className={styles.laneVersionBadge} style={{ background: `linear-gradient(135deg, ${meta.color}, color-mix(in srgb, ${meta.color} 60%, #000))` }}>
+                <span className={styles.laneVersionBadge} style={{ ["--c" as string]: meta.color }}>
                   {v.version}
                 </span>
                 PostgreSQL {v.version}
@@ -106,7 +106,7 @@ export function VersionSwimlane({ versions, instances, today, onSelect }: Props)
               <div className={styles.laneMeta}>
                 EOL {fmtDate(v.eol)}
                 <br />
-                <span style={{ color: meta.color, fontWeight: 700 }}>{eolText(v)}</span> · {onLane.length} inst.
+                <span className={styles.laneEol} style={{ ["--c" as string]: meta.color }}>{eolText(v)}</span> · {onLane.length} inst.
               </div>
             </div>
             <div className={styles.laneTrack}>
@@ -115,7 +115,7 @@ export function VersionSwimlane({ versions, instances, today, onSelect }: Props)
                 style={{
                   left: `${start}%`,
                   width: `${end - start}%`,
-                  background: `linear-gradient(90deg, color-mix(in srgb, ${meta.color} 55%, transparent), ${meta.color})`,
+                  ["--c" as string]: meta.color,
                 }}
                 initial={{ scaleX: 0, opacity: 0 }}
                 whileInView={{ scaleX: 1, opacity: 1 }}
@@ -137,10 +137,10 @@ export function VersionSwimlane({ versions, instances, today, onSelect }: Props)
                       className={styles.pill}
                       style={{ ["--pill" as string]: meta.color }}
                       onClick={() => onSelect(inst.id)}
-                      initial={{ opacity: 0, scale: 0.6, x: -12 }}
+                      initial={{ opacity: 0, scale: 0.9, x: -8 }}
                       whileInView={{ opacity: 1, scale: 1, x: 0 }}
                       viewport={{ once: true }}
-                      transition={{ type: "spring", stiffness: 420, damping: 24, delay: 0.4 + idx * 0.06 + i * 0.04 }}
+                      transition={{ type: "spring", stiffness: 320, damping: 30, delay: 0.4 + idx * 0.06 + i * 0.04 }}
                     >
                       <i />
                       {inst.app.replace(/^eux-/, "")}

@@ -1,6 +1,7 @@
 import "@navikt/ds-css";
 import "@fontsource-variable/source-sans-3";
 import "@fontsource-variable/jetbrains-mono";
+import "@fontsource-variable/source-serif-4";
 import "./globals.css";
 
 import type { Metadata } from "next";
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 
 const themeBootScript = `(function(){try{var m=localStorage.getItem(${JSON.stringify(
   THEME_STORAGE_KEY,
-)});if(m!=="light"&&m!=="dark"&&m!=="system")m="system";var d=m==="dark"||(m==="system"&&window.matchMedia("(prefers-color-scheme: dark)").matches);var e=document.documentElement;e.classList.remove("light","dark");e.classList.add(d?"dark":"light");e.style.colorScheme=d?"dark":"light";e.setAttribute("data-theme-mode",m);}catch(_){}})();`;
+)});if(m!=="light"&&m!=="dark"&&m!=="system")m="system";var d=m==="dark"||(m==="system"&&window.matchMedia("(prefers-color-scheme: dark)").matches);var e=document.documentElement;e.classList.remove("light","dark");e.classList.add(d?"dark":"light");e.style.colorScheme=d?"dark":"light";e.setAttribute("data-theme-mode",m);if(localStorage.getItem("neessi-admin-sidebar")==="collapsed")e.setAttribute("data-sidebar","collapsed");}catch(_){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

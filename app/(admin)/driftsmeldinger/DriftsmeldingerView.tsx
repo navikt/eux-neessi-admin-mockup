@@ -106,10 +106,10 @@ export function DriftsmeldingerView({ data, userName }: Props) {
         lead="Gi saksbehandlerne beskjed når noe ikke virker som det skal, eller før det skjer. Meldingene vises som banner øverst i nEESSI."
         actions={
           <>
-            <Button as="a" href="#ny" size="small" className={`${styles.heroBtn} ${styles.heroBtnSolid}`} icon={<MegaphoneSpeakingIcon aria-hidden />}>
+            <Button as="a" href="#ny" size="small" variant="primary" icon={<MegaphoneSpeakingIcon aria-hidden />}>
               Ny driftsmelding
             </Button>
-            <Button as="a" href="#tidslinje" size="small" className={styles.heroBtn} icon={<CalendarIcon aria-hidden />}>
+            <Button as="a" href="#tidslinje" size="small" variant="secondary" data-color="neutral" icon={<CalendarIcon aria-hidden />}>
               Tidslinje
             </Button>
           </>

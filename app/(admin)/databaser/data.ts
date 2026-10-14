@@ -109,15 +109,15 @@ const VERSIONS: { version: PgVersion; released: string; eol: string }[] = [
 ];
 
 export const APP_COLORS: Record<string, string> = {
-  "eux-nav-rinasak": "#6366f1",
-  "eux-rina-case-search": "#a855f7",
-  "eux-journal": "#06b6d4",
-  "eux-oppgave": "#f59e0b",
-  "eux-person-oppdatering": "#3b82f6",
-  "eux-saksbehandler": "#ec4899",
-  "eux-avslutt-rinasaker": "#10b981",
-  "eux-slett-usendte-rinasaker": "#f43f5e",
-  "eux-portal-core": "#84cc16",
+  "eux-nav-rinasak": "#2f6fb5",
+  "eux-rina-case-search": "#8c7ab0",
+  "eux-journal": "#3f8f8a",
+  "eux-oppgave": "#c98a2b",
+  "eux-person-oppdatering": "#4a84c4",
+  "eux-saksbehandler": "#c0765d",
+  "eux-avslutt-rinasaker": "#3a8a5f",
+  "eux-slett-usendte-rinasaker": "#c4505c",
+  "eux-portal-core": "#7f9a4a",
 };
 
 const TIERS: Record<string, { vcpu: number; memoryGb: number; maxConnections: number }> = {

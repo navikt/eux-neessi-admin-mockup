@@ -10,7 +10,7 @@ import styles from "./driftsmeldinger.module.css";
 import type { ListedMessage } from "./MessageList";
 import { fmtDay, fmtDuration, SEVERITY_META, type Severity } from "./model";
 
-const COLORS = { lukket: "#10b981", sett: "#f97316", ikke: "#cbd5e1" };
+const COLORS = { lukket: "#3a8a5f", sett: "#9cc5ad", ikke: "#cbd5e1" };
 
 function shorten(s: string, n = 30) {
   return s.length > n ? `${s.slice(0, n - 1)}…` : s;
@@ -73,7 +73,7 @@ export function ReadStats({ messages }: { messages: ListedMessage[] }) {
                 tickLine={false}
               />
               <Tooltip
-                cursor={{ fill: "rgba(148,163,184,0.12)" }}
+                cursor={{ fill: "rgba(154, 161, 171,0.12)" }}
                 content={<ChartTooltip formatter={(v) => `${Math.round(v)} %`} />}
               />
               <Bar dataKey="lukket" name="Sett og lukket" stackId="a" fill={COLORS.lukket} radius={[6, 0, 0, 6]} animationDuration={900} />
@@ -142,7 +142,7 @@ function Ring({ pct, color, delay, children }: { pct: number; color: string; del
   return (
     <div className={styles.ring}>
       <svg viewBox="0 0 64 64" width={64} height={64} aria-hidden>
-        <circle cx={32} cy={32} r={r} fill="none" stroke="var(--ax-bg-neutral-soft, #eef1f6)" strokeWidth={6} />
+        <circle cx={32} cy={32} r={r} fill="none" stroke="var(--ax-bg-neutral-soft, #eef0f2)" strokeWidth={6} />
         <motion.circle
           cx={32}
           cy={32}

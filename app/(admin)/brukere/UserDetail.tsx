@@ -22,7 +22,7 @@ import { fmtDate, fmtInt } from "@/lib/format";
 import { ROLE_LABELS, STATUS_LABELS } from "@/lib/mock/users";
 import { auditLog, dailyActivity, type AuditKind } from "./activity";
 import styles from "./brukere.module.css";
-import { avatarGradient, initials, ROLE_META, ROLE_ORDER, sinceText, STATUS_META, type AdminUser, type EnhetOption, type UserRole, type UserStatus } from "./types";
+import { avatarGradient, avatarHue, initials, ROLE_META, ROLE_ORDER, sinceText, STATUS_META, type AdminUser, type EnhetOption, type UserRole, type UserStatus } from "./types";
 
 interface Props {
   user: AdminUser | null;
@@ -54,13 +54,13 @@ const AUDIT_ICON: Record<AuditKind, React.ComponentType<React.SVGProps<SVGSVGEle
 };
 
 const AUDIT_COLOR: Record<AuditKind, string> = {
-  sed: "#6366f1",
-  buc: "#0ea5e9",
-  journal: "#10b981",
-  text: "#a855f7",
-  login: "#94a3b8",
-  admin: "#ec4899",
-  invite: "#f59e0b",
+  sed: "#2a6cb3",
+  buc: "#457c9d",
+  journal: "#3a8a5f",
+  text: "#7d6aa5",
+  login: "#9aa1ab",
+  admin: "#c0765d",
+  invite: "#c98a2b",
 };
 
 function DetailBody({
@@ -98,14 +98,14 @@ function DetailBody({
   return (
     <>
       <Dialog.Header className={styles.drawerHeader}>
-        <div className={styles.drawerBanner} style={{ background: avatarGradient(user.ident) }} />
+        <div className={styles.drawerBanner} style={{ "--hue": avatarHue(user.ident) } as React.CSSProperties} />
         <div className={styles.drawerProfile}>
           <motion.div
             className="avatar"
             style={{ background: avatarGradient(user.ident), width: 72, height: 72, fontSize: "1.5rem" }}
-            initial={{ scale: 0.4, rotate: -30 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ type: "spring", stiffness: 300, damping: 16, delay: 0.1 }}
+            initial={{ scale: 0.85, opacity: 0, y: 6 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            transition={{ type: "spring", stiffness: 260, damping: 26, delay: 0.1 }}
           >
             {initials(user.name)}
           </motion.div>
@@ -151,14 +151,14 @@ function DetailBody({
             <span className="muted">{activeDays} aktive dager</span>
           </div>
           <div className={styles.activityBox}>
-            <Sparkline data={activity} color={user.status === "AKTIV" ? "#8b5cf6" : "#94a3b8"} height={80} width={520} />
+            <Sparkline data={activity} color={user.status === "AKTIV" ? "#2a6cb3" : "#9aa1ab"} height={80} width={520} />
             <div className={styles.activityBars}>
               {activity.map((v, i) => (
                 <motion.span
                   key={i}
                   className={styles.activityCell}
                   title={`${v} økter`}
-                  style={{ opacity: v ? 0.25 + Math.min(1, v / 4) * 0.75 : 1, background: v ? "#8b5cf6" : undefined }}
+                  style={{ opacity: v ? 0.25 + Math.min(1, v / 4) * 0.75 : 1, background: v ? "#2a6cb3" : undefined }}
                   initial={{ scaleY: 0 }}
                   animate={{ scaleY: 1 }}
                   transition={{ delay: 0.2 + i * 0.012 }}
@@ -218,7 +218,7 @@ function DetailBody({
                 Hjemmeenhet {user.enhetId} · alltid tilgang
               </div>
             </div>
-            <CheckmarkIcon aria-hidden style={{ marginLeft: "auto", color: "#10b981", fontSize: "1.3rem" }} />
+            <CheckmarkIcon aria-hidden style={{ marginLeft: "auto", color: "#3a8a5f", fontSize: "1.3rem" }} />
           </div>
           <CheckboxGroup legend="Tilgang til andre enheter" hideLegend value={extra} onChange={(v: string[]) => setExtra(v)} size="small">
             <div className={styles.enhetGrid}>

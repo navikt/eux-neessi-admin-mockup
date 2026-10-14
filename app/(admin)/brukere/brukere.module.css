@@ -1,28 +1,3 @@
-/* ---------- Hero buttons ---------- */
-
-.heroButton {
-  background: #fff !important;
-  color: #4c1d95 !important;
-  box-shadow: 0 12px 28px -12px rgba(0, 0, 0, 0.55);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.heroButton:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 18px 34px -14px rgba(0, 0, 0, 0.6);
-}
-
-.heroGhost {
-  background: rgba(255, 255, 255, 0.12) !important;
-  color: #fff !important;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) !important;
-  backdrop-filter: blur(6px);
-}
-
-.heroGhost:hover {
-  background: rgba(255, 255, 255, 0.22) !important;
-}
-
 /* ---------- Enhet bars ---------- */
 
 .enhetBars {
@@ -38,7 +13,7 @@
   gap: 14px;
   padding: 7px 10px;
   border: 1px solid transparent;
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   background: transparent;
   font: inherit;
   color: inherit;
@@ -48,12 +23,12 @@
 }
 
 .enhetBar:hover {
-  background: color-mix(in srgb, #8b5cf6 7%, transparent);
+  background: var(--ax-bg-neutral-soft);
 }
 
 .enhetBarActive {
-  background: color-mix(in srgb, #8b5cf6 11%, transparent);
-  border-color: color-mix(in srgb, #8b5cf6 35%, transparent);
+  background: color-mix(in srgb, var(--brand-a) 8%, transparent);
+  border-color: color-mix(in srgb, var(--brand-a) 28%, transparent);
 }
 
 .enhetBarDim {
@@ -70,7 +45,7 @@
 .enhetBarTrack {
   display: flex;
   gap: 2px;
-  height: 14px;
+  height: 10px;
   border-radius: 999px;
   overflow: hidden;
   background: var(--ax-bg-neutral-soft);
@@ -86,7 +61,7 @@
 }
 
 .enhetBarValue {
-  font-weight: 700;
+  font-weight: 600;
   text-align: right;
 }
 
@@ -107,9 +82,10 @@
 
 .donutValue {
   font-size: 1.9rem;
-  font-weight: 750;
-  letter-spacing: -0.03em;
+  font-weight: 610;
+  letter-spacing: -0.02em;
   line-height: 1;
+  font-variant-numeric: tabular-nums;
 }
 
 .roleLegend {
@@ -124,7 +100,7 @@
   align-items: center;
   gap: 8px;
   padding: 6px 10px;
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   border: 1px solid transparent;
   background: transparent;
   font: inherit;
@@ -226,7 +202,7 @@
 @keyframes freshGlow {
   0%,
   30% {
-    background: color-mix(in srgb, #10b981 22%, transparent);
+    background: color-mix(in srgb, #3a8a5f 14%, transparent);
   }
   100% {
     background: transparent;
@@ -255,12 +231,12 @@
 }
 
 .newTag {
-  animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both 0.3s;
+  animation: popIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both 0.3s;
 }
 
 @keyframes popIn {
   from {
-    transform: scale(0.3);
+    transform: scale(0.85);
     opacity: 0;
   }
   to {
@@ -333,12 +309,14 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 10px 8px 10px;
-  border-radius: 999px;
-  color: #fff;
-  background: linear-gradient(120deg, rgba(30, 27, 75, 0.94), rgba(76, 29, 149, 0.94));
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 24px 50px -16px rgba(76, 29, 149, 0.7), 0 2px 6px rgba(0, 0, 0, 0.2);
+  width: max-content;
+  white-space: nowrap;
+  padding: 6px 8px 6px 8px;
+  border-radius: var(--radius-lg);
+  color: var(--ax-text-neutral);
+  background: color-mix(in srgb, var(--card-bg) 94%, transparent);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow-hover);
   backdrop-filter: blur(14px);
 }
 
@@ -351,38 +329,26 @@
 .bulkCount {
   display: grid;
   place-items: center;
-  min-width: 30px;
-  height: 30px;
+  min-width: 28px;
+  height: 28px;
   padding: 0 8px;
-  border-radius: 999px;
-  font-weight: 800;
-  background: linear-gradient(135deg, #a855f7, #ec4899);
-  box-shadow: 0 6px 14px -6px #ec4899;
+  border-radius: 7px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent-text);
+  background: color-mix(in srgb, var(--brand-a) 12%, transparent);
 }
 
 .bulkLabel {
-  font-weight: 600;
+  font-weight: 550;
   margin-right: 4px;
 }
 
 .bulkDivider {
   width: 1px;
   height: 22px;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--card-border);
   margin: 0 4px;
-}
-
-.bulkBtn {
-  color: #fff !important;
-  border-radius: 999px !important;
-}
-
-.bulkBtn:hover {
-  background: rgba(255, 255, 255, 0.14) !important;
-}
-
-.bulkDanger {
-  color: #fda4af !important;
 }
 
 /* ---------- Detail drawer ---------- */
@@ -400,8 +366,11 @@
 
 .drawerBanner {
   height: 96px;
-  opacity: 0.9;
-  mask-image: linear-gradient(180deg, #000 30%, transparent);
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--hue) 22%, transparent) 1px, transparent 1.3px) 0 0 / 14px 14px,
+    linear-gradient(180deg, color-mix(in srgb, var(--hue) 14%, transparent), transparent);
+  border-bottom: 1px solid var(--hairline);
+  mask-image: linear-gradient(180deg, #000 40%, transparent);
 }
 
 .drawerProfile {
@@ -414,13 +383,14 @@
 }
 
 .drawerProfile :global(.avatar) {
-  box-shadow: 0 0 0 4px var(--ax-bg-raised), 0 14px 28px -12px rgba(76, 29, 149, 0.6);
+  box-shadow: 0 0 0 4px var(--ax-bg-raised), 0 8px 20px -12px rgba(32, 39, 51, 0.35);
 }
 
 .drawerTitle {
-  font-size: 1.45rem !important;
-  font-weight: 750 !important;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em;
   margin: 0;
 }
 
@@ -455,8 +425,8 @@
 
 .miniStat {
   padding: 10px 12px;
-  border-radius: 14px;
-  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--hairline);
   background: var(--ax-bg-neutral-soft);
 }
 
@@ -466,7 +436,8 @@
 }
 
 .miniStatValue {
-  font-weight: 700;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
   font-size: 0.98rem;
   white-space: nowrap;
   overflow: hidden;
@@ -490,16 +461,14 @@
 .panelHead h3 {
   margin: 0;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .activityBox {
   padding: 14px 14px 10px;
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   border: 1px solid var(--card-border);
-  background:
-    radial-gradient(260px 120px at 90% 0%, rgba(139, 92, 246, 0.12), transparent 70%),
-    var(--card-bg);
+  background: var(--card-bg);
 }
 
 .activityBox svg {
@@ -519,7 +488,7 @@
   display: block;
   height: 14px;
   border-radius: 4px;
-  background: var(--ax-bg-neutral-moderate, #e5e7eb);
+  background: var(--ax-bg-neutral-moderate, #e4e6ea);
   transform-origin: bottom;
 }
 
@@ -535,11 +504,11 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #be123c;
+  color: #9c2f3c;
 }
 
 :global(html.dark) .warnText {
-  color: #fb7185;
+  color: #d98a92;
 }
 
 .switchList {
@@ -551,7 +520,7 @@
 .switchRow {
   position: relative;
   padding: 6px 12px 6px 16px;
-  border-radius: 14px;
+  border-radius: var(--radius-md);
   border: 1px solid var(--card-border);
   transition: border-color 0.25s ease, background 0.25s ease;
   overflow: hidden;
@@ -567,7 +536,7 @@
   left: 0;
   top: 0;
   bottom: 0;
-  width: 4px;
+  width: 3px;
   background: var(--role);
   opacity: 0.25;
   transition: opacity 0.25s ease;
@@ -582,14 +551,14 @@
   align-items: center;
   gap: 12px;
   padding: 10px 14px;
-  border-radius: 14px;
-  background: color-mix(in srgb, #10b981 9%, transparent);
-  border: 1px solid color-mix(in srgb, #10b981 30%, transparent);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, #3a8a5f 8%, transparent);
+  border: 1px solid color-mix(in srgb, #3a8a5f 24%, transparent);
 }
 
 .homeEnhet > svg:first-child {
   font-size: 1.4rem;
-  color: #10b981;
+  color: #3a8a5f;
 }
 
 .enhetGrid {
@@ -627,7 +596,7 @@
 .timelineIcon {
   width: 36px;
   height: 36px;
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   display: grid;
   place-items: center;
   font-size: 1.1rem;
@@ -669,15 +638,13 @@
   align-items: center;
   gap: 14px;
   padding: 14px 16px;
-  border-radius: 16px;
-  border: 1px dashed color-mix(in srgb, #8b5cf6 45%, transparent);
-  background:
-    radial-gradient(300px 120px at 100% 0%, rgba(236, 72, 153, 0.12), transparent 70%),
-    color-mix(in srgb, #8b5cf6 7%, transparent);
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--card-border);
+  background: var(--ax-bg-neutral-soft);
 }
 
 .previewName {
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1.05rem;
 }
 
@@ -720,15 +687,15 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 2px 9px 2px 7px;
-  border-radius: 999px;
+  padding: 1px 8px 1px 7px;
+  border-radius: 6px;
   font-size: 0.78rem;
-  font-weight: 600;
+  font-weight: 550;
   line-height: 1.5;
   white-space: nowrap;
   color: color-mix(in srgb, var(--role) 78%, var(--ax-text-neutral));
-  background: color-mix(in srgb, var(--role) 11%, transparent);
-  border: 1px solid color-mix(in srgb, var(--role) 26%, transparent);
+  background: color-mix(in srgb, var(--role) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--role) 22%, transparent);
 }
 
 .rolePill::before {

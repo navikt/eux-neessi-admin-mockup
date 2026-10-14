@@ -2,23 +2,41 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  color: #fff;
+  gap: 6px;
+  padding: 10px 14px 9px;
+  min-width: 112px;
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--card-bg) 88%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--ax-text-neutral);
 }
 
 .clockTime {
   font-family: var(--font-mono);
-  font-size: 2.6rem;
-  font-weight: 700;
-  letter-spacing: -0.04em;
+  font-size: 1.55rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
   line-height: 1;
-  text-shadow: 0 6px 30px rgba(0, 0, 0, 0.25);
+}
+
+.clockColon {
+  display: inline-block;
+  margin: 0 1px;
+  color: var(--muted);
 }
 
 .clockLabel {
-  font-size: 0.78rem;
-  letter-spacing: 0.18em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  opacity: 0.75;
+  color: var(--muted);
 }
 
 .feedCard {
@@ -41,16 +59,15 @@
   align-items: center;
   gap: 10px;
   padding: 8px;
-  border-radius: 12px;
+  border-radius: 10px;
 }
 
 .feedIcon {
   width: 30px;
   height: 30px;
-  border-radius: 10px;
+  border-radius: 8px;
   display: grid;
   place-items: center;
-  color: #fff;
   flex-shrink: 0;
   font-size: 1rem;
 }
@@ -89,14 +106,7 @@
   height: 100%;
 }
 
-.answerGlow {
-  position: absolute;
-  inset: -40% -20% auto auto;
-  width: 360px;
-  height: 360px;
-  background: radial-gradient(circle, rgba(244, 63, 94, 0.18), transparent 65%);
-  pointer-events: none;
-}
+
 
 .answerHead {
   display: flex;
@@ -109,13 +119,17 @@
 .answerIcon {
   width: 44px;
   height: 44px;
-  border-radius: 14px;
+  border-radius: 10px;
   display: grid;
   place-items: center;
-  color: #fff;
-  font-size: 1.4rem;
-  background: linear-gradient(135deg, #f43f5e, #f59e0b);
-  box-shadow: 0 10px 24px -10px #f43f5e;
+  font-size: 1.35rem;
+  color: #c4505c;
+  background: color-mix(in srgb, #c4505c 12%, transparent);
+  transition: transform 0.25s ease;
+}
+
+.answerCard:hover .answerIcon {
+  transform: scale(1.05);
 }
 
 .answerStats {
@@ -127,15 +141,17 @@
 }
 
 .bigNum {
-  font-size: 2.2rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
+  font-size: 2.1rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
   line-height: 1.1;
 }
 
 .stackBar {
   display: flex;
-  height: 12px;
+  height: 8px;
+  gap: 2px;
   border-radius: 999px;
   overflow: hidden;
   background: var(--ax-bg-neutral-soft, #eef0f4);
@@ -174,8 +190,9 @@
 
 .mtdValue {
   font-size: 1.5rem;
-  font-weight: 750;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  font-variant-numeric: tabular-nums;
 }
 
 .sysCard {
@@ -192,12 +209,21 @@
 .sysIcon {
   width: 36px;
   height: 36px;
-  border-radius: 11px;
+  border-radius: 10px;
   display: grid;
   place-items: center;
   font-size: 1.2rem;
   color: var(--brand-a);
   background: color-mix(in srgb, var(--brand-a) 12%, transparent);
+  transition: transform 0.25s ease;
+}
+
+.sysCard:hover .sysIcon {
+  transform: scale(1.05);
+}
+
+.sysTitle {
+  font-weight: 600;
 }
 
 .sysLink {
@@ -261,9 +287,9 @@
   gap: 10px;
   align-items: center;
   padding: 12px 16px;
-  border-radius: var(--radius-md);
-  background: color-mix(in srgb, #f59e0b 10%, var(--card-bg));
-  border: 1px solid color-mix(in srgb, #f59e0b 30%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, #c98a2b 7%, var(--card-bg));
+  border: 1px solid color-mix(in srgb, #c98a2b 22%, var(--card-border));
   font-size: 0.9rem;
   flex-wrap: wrap;
 }

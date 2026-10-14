@@ -14,12 +14,12 @@ export interface Category {
 }
 
 export const CATEGORIES: Category[] = [
-  { id: "saksbehandling", name: "Saksbehandling", color: "#6366f1" },
-  { id: "dokumenter", name: "Dokumenter", color: "#0ea5e9" },
-  { id: "navigasjon", name: "Navigasjon og søk", color: "#14b8a6" },
-  { id: "pdu1", name: "PDU1", color: "#f59e0b" },
-  { id: "administrativ", name: "Administrative SED-er", color: "#ec4899" },
-  { id: "kontroll", name: "Kontroll", color: "#a855f7" },
+  { id: "saksbehandling", name: "Saksbehandling", color: "#2a6cb3" },
+  { id: "dokumenter", name: "Dokumenter", color: "#457c9d" },
+  { id: "navigasjon", name: "Navigasjon og søk", color: "#3f8f8a" },
+  { id: "pdu1", name: "PDU1", color: "#c98a2b" },
+  { id: "administrativ", name: "Administrative SED-er", color: "#c0765d" },
+  { id: "kontroll", name: "Kontroll", color: "#7d6aa5" },
 ];
 
 export type Verdict = "TAR_AV" | "LOVENDE" | "LAV";

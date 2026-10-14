@@ -40,9 +40,9 @@ export function Banner({ title, body, severity, dismissible, period, onClose, co
       <motion.span
         key={severity}
         className={styles.bannerIcon}
-        initial={{ scale: 0.4, rotate: -30, opacity: 0 }}
+        initial={{ scale: 0.8, rotate: -8, opacity: 0 }}
         animate={{ scale: 1, rotate: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 420, damping: 18 }}
+        transition={{ type: "spring", stiffness: 320, damping: 26 }}
       >
         <Icon aria-hidden />
       </motion.span>

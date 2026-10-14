@@ -62,9 +62,9 @@ export const SEVERITY_META: Record<
   Severity,
   { label: string; color: string; soft: string; tag: "info" | "warning" | "danger"; toast: "info" | "warning" | "error" }
 > = {
-  info: { label: "Info", color: "#2563eb", soft: "#dbeafe", tag: "info", toast: "info" },
-  advarsel: { label: "Advarsel", color: "#f59e0b", soft: "#fef3c7", tag: "warning", toast: "warning" },
-  feil: { label: "Feil", color: "#e11d48", soft: "#ffe4e6", tag: "danger", toast: "error" },
+  info: { label: "Info", color: "#2a6cb3", soft: "#dbeafe", tag: "info", toast: "info" },
+  advarsel: { label: "Advarsel", color: "#c98a2b", soft: "#f6eed9", tag: "warning", toast: "warning" },
+  feil: { label: "Feil", color: "#b23a48", soft: "#f6e4e5", tag: "danger", toast: "error" },
 };
 
 export const STATUS_META: Record<MessageStatus, { label: string; tag: "success" | "info" | "neutral" | "warning" }> = {

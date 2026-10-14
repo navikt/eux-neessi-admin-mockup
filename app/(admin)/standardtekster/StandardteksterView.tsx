@@ -131,8 +131,8 @@ export function StandardteksterView({ todayIso, userName, initialSed, initialSco
         actions={
           <Button
             size="small"
-            variant="secondary-neutral"
-            className={styles.heroBtn}
+            variant="secondary"
+            data-color="neutral"
             icon={<ArrowUndoIcon aria-hidden />}
             onClick={() => {
               resetStore();
@@ -264,7 +264,7 @@ export function StandardteksterView({ todayIso, userName, initialSed, initialSco
                         className={`${styles.mCell} ${has ? styles.mOverride : ""}`}
                         data-active={t.sed === sed && scope === e.id}
                         onClick={() => select(t.sed, e.id)}
-                        initial={{ opacity: 0, scale: 0.6 }}
+                        initial={{ opacity: 0, scale: 0.85 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: ri * 0.03 + ci * 0.015 }}
@@ -629,9 +629,9 @@ function sedNameEn(sed: string) {
 function UsageCard({ template }: { template: TextTemplate }) {
   const u = template.usage;
   const parts = [
-    { k: "Sendt uendret", v: u.unchanged, c: "#10b981" },
-    { k: "Redigert", v: u.edited, c: "#6366f1" },
-    { k: "Tømt", v: u.cleared, c: "#f43f5e" },
+    { k: "Sendt uendret", v: u.unchanged, c: "#3a8a5f" },
+    { k: "Redigert", v: u.edited, c: "#2a6cb3" },
+    { k: "Tømt", v: u.cleared, c: "#c4505c" },
   ];
   return (
     <Card title="Hvordan brukes teksten?" subtitle={`${fmtInt(template.sentLast30)} ${template.sed} sendt siste 30 dager`}>

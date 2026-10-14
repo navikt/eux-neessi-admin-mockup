@@ -14,10 +14,10 @@ interface ToastItem {
 }
 
 const META: Record<ToastVariant, { color: string; icon: typeof CheckmarkCircleFillIcon }> = {
-  success: { color: "#10b981", icon: CheckmarkCircleFillIcon },
-  info: { color: "#2563eb", icon: InformationSquareFillIcon },
-  warning: { color: "#f59e0b", icon: ExclamationmarkTriangleFillIcon },
-  error: { color: "#f43f5e", icon: XMarkOctagonFillIcon },
+  success: { color: "#3a8a5f", icon: CheckmarkCircleFillIcon },
+  info: { color: "#2a6cb3", icon: InformationSquareFillIcon },
+  warning: { color: "#c98a2b", icon: ExclamationmarkTriangleFillIcon },
+  error: { color: "#c4505c", icon: XMarkOctagonFillIcon },
 };
 
 /** Lightweight, page-local toasts. Render `toasts` once and call `push` from event handlers. */

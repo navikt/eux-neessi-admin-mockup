@@ -15,25 +15,25 @@ export const PERSONAS: Persona[] = [
     name: "Ragnhild Teigen",
     title: "Fagansvarlig EESSI",
     description: "Standardtekster, svarfrister og fag",
-    color: "#6366f1",
+    color: "#2f6fb5",
   },
   {
     name: "Silje Haugland",
     title: "Administrator",
     description: "Brukere, tilganger og verktøy",
-    color: "#ec4899",
+    color: "#c0765d",
   },
   {
     name: "Torbjørn Elvestad",
     title: "Utvikler, Team EESSI",
     description: "Databaser, drift og Kafka",
-    color: "#0ea5e9",
+    color: "#457c9d",
   },
   {
     name: "Ida Granli",
     title: "Avdelingsleder",
     description: "Statistikk og leveranse til EU",
-    color: "#f59e0b",
+    color: "#c98a2b",
   },
 ];
 

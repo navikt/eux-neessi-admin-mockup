@@ -189,7 +189,7 @@ export const CACHES: CacheInfo[] = [
     sizeMb: 38.4,
     hitRate: 0.987,
     ttl: "24 t",
-    color: "#059669",
+    color: "#2f7a52",
   },
   {
     id: "kodeverk",
@@ -200,7 +200,7 @@ export const CACHES: CacheInfo[] = [
     sizeMb: 11.2,
     hitRate: 0.996,
     ttl: "12 t",
-    color: "#d97706",
+    color: "#b07320",
   },
   {
     id: "saksbehandlere",
@@ -211,7 +211,7 @@ export const CACHES: CacheInfo[] = [
     sizeMb: 4.7,
     hitRate: 0.941,
     ttl: "30 min",
-    color: "#2563eb",
+    color: "#2a6cb3",
   },
 ];
 

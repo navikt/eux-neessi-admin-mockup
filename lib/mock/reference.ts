@@ -74,15 +74,15 @@ export interface Sector {
 }
 
 export const SECTORS: Sector[] = [
-  { code: "P", name: "Pensjon", color: "#6366f1", weight: 0.24, baseAnswerDays: 32 },
-  { code: "LA", name: "Lovvalg", color: "#0ea5e9", weight: 0.18, baseAnswerDays: 21 },
-  { code: "FB", name: "Familieytelser", color: "#ec4899", weight: 0.14, baseAnswerDays: 26 },
-  { code: "S", name: "Sykdom", color: "#f43f5e", weight: 0.12, baseAnswerDays: 15 },
-  { code: "H", name: "Horisontale", color: "#8b5cf6", weight: 0.11, baseAnswerDays: 12 },
-  { code: "UB", name: "Arbeidsledighet", color: "#f59e0b", weight: 0.09, baseAnswerDays: 9 },
-  { code: "X", name: "Administrative", color: "#64748b", weight: 0.08, baseAnswerDays: 5 },
-  { code: "AW", name: "Arbeidsskade", color: "#f97316", weight: 0.03, baseAnswerDays: 30 },
-  { code: "M", name: "Medisinsk", color: "#14b8a6", weight: 0.01, baseAnswerDays: 28 },
+  { code: "P", name: "Pensjon", color: "#2f6fb5", weight: 0.24, baseAnswerDays: 32 },
+  { code: "LA", name: "Lovvalg", color: "#457c9d", weight: 0.18, baseAnswerDays: 21 },
+  { code: "FB", name: "Familieytelser", color: "#c0765d", weight: 0.14, baseAnswerDays: 26 },
+  { code: "S", name: "Sykdom", color: "#b5525c", weight: 0.12, baseAnswerDays: 15 },
+  { code: "H", name: "Horisontale", color: "#7d6aa5", weight: 0.11, baseAnswerDays: 12 },
+  { code: "UB", name: "Arbeidsledighet", color: "#c49a3c", weight: 0.09, baseAnswerDays: 9 },
+  { code: "X", name: "Administrative", color: "#6f7785", weight: 0.08, baseAnswerDays: 5 },
+  { code: "AW", name: "Arbeidsskade", color: "#8a6a4f", weight: 0.03, baseAnswerDays: 30 },
+  { code: "M", name: "Medisinsk", color: "#4a9a8f", weight: 0.01, baseAnswerDays: 28 },
 ];
 
 export const SECTOR_BY_CODE: Record<SectorCode, Sector> = Object.fromEntries(

@@ -40,6 +40,7 @@ export function LoginView({ error }: { error?: string }) {
         my.set(e.clientY / window.innerHeight - 0.5);
       }}
     >
+      <ParallaxLayer x={sx} y={sy} depth={-14} className={styles.dots} />
       <ParallaxLayer x={sx} y={sy} depth={-30} className={styles.glowA} />
       <ParallaxLayer x={sx} y={sy} depth={-55} className={styles.glowB} />
       <ParallaxLayer x={sx} y={sy} depth={18} className={styles.ring}>
@@ -50,9 +51,12 @@ export function LoginView({ error }: { error?: string }) {
               <motion.polygon
                 key={i}
                 points={star(200 + Math.cos(a) * 150, 200 + Math.sin(a) * 150, 16)}
-                fill="#ffcc00"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={1.6}
+                strokeLinejoin="round"
                 initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: [0.55, 1, 0.55], scale: 1 }}
+                animate={{ opacity: [0.5, 1, 0.5], scale: 1 }}
                 transition={{ delay: 0.3 + i * 0.07, duration: 3, repeat: Infinity, repeatType: "mirror" }}
                 style={{ transformOrigin: `${200 + Math.cos(a) * 150}px ${200 + Math.sin(a) * 150}px` }}
               />
@@ -71,16 +75,16 @@ export function LoginView({ error }: { error?: string }) {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
       >
         <div className={styles.brand}>
-          <motion.span className={styles.logo} animate={{ rotate: [0, 72, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}>
-            <StarsEuIcon aria-hidden fontSize="2rem" color="#ffcc00" />
+          <motion.span className={styles.logo} whileHover={{ rotate: 30 }} transition={{ type: "spring", stiffness: 160, damping: 14 }}>
+            <StarsEuIcon aria-hidden fontSize="1.6rem" color="#e8b923" />
           </motion.span>
           <div>
             <div className={styles.brandTitle}>nEESSI admin</div>
-            <div className={styles.brandSub}>EUX · Team EESSI · Nav</div>
+            <div className={styles.brandSub}>Nav · Team EESSI</div>
           </div>
         </div>
         <h1 className={styles.title}>
-          Velkommen tilbake <span className={styles.wave}>👋</span>
+          Velkommen tilbake
         </h1>
         <p className={styles.lead}>Hvem er du i dag? Velg en rolle eller skriv inn navnet ditt.</p>
 
@@ -107,10 +111,10 @@ export function LoginView({ error }: { error?: string }) {
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.35 + i * 0.07 }}
-                  whileHover={{ y: -3 }}
+                  whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <span className={styles.personaAvatar} style={{ background: `linear-gradient(135deg, ${p.color}, #111827)` }}>
+                  <span className={styles.personaAvatar} style={{ background: p.color }}>
                     {initials(p.name)}
                   </span>
                   <span style={{ minWidth: 0 }}>
@@ -201,7 +205,7 @@ function FloatingChip({
       <motion.span
         className={styles.chip}
         initial={{ opacity: 0, scale: 0.6 }}
-        animate={{ opacity: 0.85, scale: 1, y: [0, -10, 0] }}
+        animate={{ opacity: 1, scale: 1, y: [0, -8, 0] }}
         transition={{
           opacity: { delay: 0.5 + index * 0.08 },
           scale: { delay: 0.5 + index * 0.08 },

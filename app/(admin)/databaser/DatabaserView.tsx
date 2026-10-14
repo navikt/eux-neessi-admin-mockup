@@ -91,7 +91,7 @@ function InstanceCard({ inst, today, onOpen }: { inst: DbInstance; today: string
         <div className="bar-track">
           <motion.div
             className="bar-fill"
-            style={{ width: `${pct}%`, background: `linear-gradient(90deg, ${inst.appColor}, ${diskColor(pct)})`, transformOrigin: "left" }}
+            style={{ width: `${pct}%`, background: diskColor(pct), transformOrigin: "left" }}
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
@@ -110,13 +110,13 @@ function InstanceCard({ inst, today, onOpen }: { inst: DbInstance; today: string
             </span>
           </div>
           <div className="bar-track" style={{ height: 4, marginTop: 4 }}>
-            <div className="bar-fill" style={{ width: `${connPct}%`, background: "#06b6d4" }} />
+            <div className="bar-fill" style={{ width: `${connPct}%`, background: "#3f8f8a" }} />
           </div>
         </div>
         <div className={styles.instStat}>
           <div className={styles.instStatLabel}>CPU</div>
           <div className={styles.instStatValue}>{inst.cpuPct} %</div>
-          <Sparkline data={inst.cpu24h} color="#a855f7" height={16} width={80} fill={false} />
+          <Sparkline data={inst.cpu24h} color="#7d6aa5" height={16} width={80} fill={false} />
         </div>
         <div className={styles.instStat}>
           <div className={styles.instStatLabel}>HA</div>
@@ -289,7 +289,7 @@ function RecommendationItem({
       <div className={styles.recRank}>{index + 1}</div>
       <div style={{ minWidth: 0 }}>
         <div className={styles.recHead}>
-          <Tag size="small" variant={rec.priority === "kritisk" ? "strong" : "moderate"} data-color={prio.tag}>
+          <Tag size="small" variant="moderate" data-color={prio.tag}>
             {prio.label}
           </Tag>
           <span className={styles.recApp}>{rec.app}</span>
@@ -319,13 +319,13 @@ function RecommendationItem({
       </div>
       <div className={styles.recSide}>
         <div className={styles.versionJump}>
-          <span className={styles.vchip} style={{ background: HEALTH_META[list[0]?.health ?? "eol"].color }}>
+          <span className={styles.vchip} style={{ ["--c" as string]: HEALTH_META[list[0]?.health ?? "eol"].color }}>
             PG{rec.worstVersion}
           </span>
-          <motion.span animate={{ x: [0, 4, 0] }} transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }} style={{ display: "inline-flex" }}>
+          <motion.span animate={{ x: [0, 3, 0] }} transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }} style={{ display: "inline-flex" }}>
             <ArrowRightIcon aria-hidden />
           </motion.span>
-          <span className={styles.vchip} style={{ background: "#10b981" }}>
+          <span className={styles.vchip} style={{ ["--c" as string]: "#3a8a5f" }}>
             POSTGRES_{rec.target}
           </span>
         </div>
@@ -391,10 +391,10 @@ export function DatabaserView({ overview }: { overview: DatabaseOverview }) {
         lead="Alle Postgres-instanser for EUX-appene på GCP. Se hvilke versjoner vi kjører, hva som bør oppgraderes, og hvor fort databasene vokser."
         actions={
           <>
-            <Button as="a" href="#anbefalinger" size="small" className={`${styles.heroBtn} ${styles.heroBtnSolid}`} icon={<WrenchIcon aria-hidden />}>
+            <Button as="a" href="#anbefalinger" size="small" variant="primary" icon={<WrenchIcon aria-hidden />}>
               Se anbefalinger
             </Button>
-            <Button as="a" href="#storrelse" size="small" className={styles.heroBtn} icon={<HddUpIcon aria-hidden />}>
+            <Button as="a" href="#storrelse" size="small" variant="secondary" data-color="neutral" icon={<HddUpIcon aria-hidden />}>
               Størrelse og vekst
             </Button>
           </>
@@ -421,16 +421,16 @@ export function DatabaserView({ overview }: { overview: DatabaseOverview }) {
 
       <Stagger className="grid grid--4">
         <StaggerItem>
-          <KpiCard label="Vekst siste 12 mnd" value={totalHistory[11] - totalHistory[0]} suffix=" GB" icon={HddUpIcon} color="#6366f1" delta={((totalHistory[11] - totalHistory[0]) / totalHistory[0]) * 100} invertDelta deltaLabel="mot okt. i fjor" spark={totalHistory} />
+          <KpiCard label="Vekst siste 12 mnd" value={totalHistory[11] - totalHistory[0]} suffix=" GB" icon={HddUpIcon} color="#2a6cb3" delta={((totalHistory[11] - totalHistory[0]) / totalHistory[0]) * 100} invertDelta deltaLabel="mot okt. i fjor" spark={totalHistory} />
         </StaggerItem>
         <StaggerItem>
-          <KpiCard label="Tilkoblinger nå" value={connsNow} icon={PersonGroupIcon} color="#06b6d4" deltaLabel={`maks ${Math.max(...conns24)} siste døgn`} spark={conns24} />
+          <KpiCard label="Tilkoblinger nå" value={connsNow} icon={PersonGroupIcon} color="#3f8f8a" deltaLabel={`maks ${Math.max(...conns24)} siste døgn`} spark={conns24} />
         </StaggerItem>
         <StaggerItem>
-          <KpiCard label="Prod med høy tilgjengelighet" value={prodHa} suffix={` av ${prod.length}`} icon={ShieldCheckmarkIcon} color="#10b981" foot={<span>{prod.filter((p) => !p.highAvailability).map((p) => p.app.replace("eux-", "")).join(", ")} uten failover</span>} />
+          <KpiCard label="Prod med høy tilgjengelighet" value={prodHa} suffix={` av ${prod.length}`} icon={ShieldCheckmarkIcon} color="#3a8a5f" foot={<span>{prod.filter((p) => !p.highAvailability).map((p) => p.app.replace("eux-", "")).join(", ")} uten failover</span>} />
         </StaggerItem>
         <StaggerItem>
-          <KpiCard label="Backup siste døgn" value={backedUp} suffix={` av ${instances.length}`} icon={ClockDashedIcon} color="#f59e0b" foot={<span>{instances.filter((i) => i.pointInTimeRecovery).length} med point-in-time recovery</span>} />
+          <KpiCard label="Backup siste døgn" value={backedUp} suffix={` av ${instances.length}`} icon={ClockDashedIcon} color="#c98a2b" foot={<span>{instances.filter((i) => i.pointInTimeRecovery).length} med point-in-time recovery</span>} />
         </StaggerItem>
       </Stagger>
 
@@ -478,7 +478,7 @@ export function DatabaserView({ overview }: { overview: DatabaseOverview }) {
           {visibleRecs.length === 0 ? (
             <div className="card empty">
               <DatabaseIcon aria-hidden style={{ fontSize: "2rem" }} />
-              <div>Ingen oppgraderinger trengs i dette utvalget 🎉</div>
+              <div>Ingen oppgraderinger trengs i dette utvalget.</div>
             </div>
           ) : null}
         </div>

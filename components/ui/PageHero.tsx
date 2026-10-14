@@ -14,54 +14,44 @@ interface Props {
   children?: React.ReactNode;
 }
 
-/** Gradient page header with multi-layer parallax blobs that drift at different speeds while scrolling. */
+/** Calm page header: light surface, dot grid, soft accent tint and an EU star ring that drift with parallax while scrolling. */
 export function PageHero({ eyebrow, title, lead, variant = "default", actions, children }: Props) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const yFast = useTransform(scrollYProgress, [0, 1], [0, 160]);
-  const ySlow = useTransform(scrollYProgress, [0, 1], [0, 60]);
-  const yBack = useTransform(scrollYProgress, [0, 1], [0, -90]);
-  const contentY = useTransform(scrollYProgress, [0, 1], [0, 40]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.9], [1, 0.3]);
-  const rotate = useTransform(scrollYProgress, [0, 1], [0, 25]);
+  const yGrid = useTransform(scrollYProgress, [0, 1], [0, 70]);
+  const yTint = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const yRing = useTransform(scrollYProgress, [0, 1], [0, 40]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, 24]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.9], [1, 0.45]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, 30]);
 
   return (
     <motion.section
       ref={ref}
       className={`hero${variant !== "default" ? ` hero--${variant}` : ""}`}
-      initial={{ opacity: 0, y: 14, scale: 0.99 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="hero__grid" />
+      <motion.div className="hero__grid" style={{ y: yGrid }} />
       <motion.div
         className="hero__blob"
-        style={{ y: yFast, width: 380, height: 380, right: -80, top: -140, background: "#22d3ee" }}
-        animate={{ x: [0, 30, 0], scale: [1, 1.08, 1] }}
-        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        style={{ y: yTint, width: 420, height: 320, right: -120, top: -160 }}
+        animate={{ x: [0, 24, 0], scale: [1, 1.06, 1] }}
+        transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
         className="hero__blob"
-        style={{ y: ySlow, width: 300, height: 300, right: 260, bottom: -170, background: "#f472b6" }}
-        animate={{ x: [0, -40, 0], scale: [1, 1.12, 1] }}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        style={{ y: yGrid, width: 260, height: 200, right: 280, bottom: -170, opacity: 0.08 }}
+        animate={{ x: [0, -30, 0] }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
       />
-      <motion.div
-        className="hero__blob"
-        style={{ y: yBack, width: 240, height: 240, left: -60, top: -60, background: "#818cf8" }}
-        animate={{ scale: [1, 1.15, 1] }}
-        transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.svg
-        aria-hidden
-        viewBox="0 0 200 200"
-        style={{ position: "absolute", right: 28, top: 22, width: 150, height: 150, opacity: 0.22, rotate, y: ySlow, zIndex: -1 }}
-      >
+      <motion.svg aria-hidden viewBox="0 0 200 200" className="hero__ring" style={{ rotate, y: yRing }}>
         {Array.from({ length: 12 }).map((_, i) => {
           const a = (i / 12) * Math.PI * 2;
           const x = 100 + Math.cos(a) * 72;
           const y = 100 + Math.sin(a) * 72;
-          return <polygon key={i} points={star(x, y, 9)} fill="#ffcc00" />;
+          return <polygon key={i} points={star(x, y, 9)} fill="none" stroke="currentColor" strokeWidth={1.4} strokeLinejoin="round" />;
         })}
       </motion.svg>
       <motion.div style={{ y: contentY, opacity: contentOpacity }}>
@@ -71,7 +61,7 @@ export function PageHero({ eyebrow, title, lead, variant = "default", actions, c
             <h1 className="hero__title">{title}</h1>
             {lead ? <p className="hero__lead">{lead}</p> : null}
           </div>
-          {actions ? <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>{actions}</div> : null}
+          {actions ? <div className="hero__actions">{actions}</div> : null}
         </div>
         {children ? <div className="hero__stats">{children}</div> : null}
       </motion.div>

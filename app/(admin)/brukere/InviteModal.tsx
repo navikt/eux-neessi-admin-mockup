@@ -92,9 +92,9 @@ function InviteForm({ onClose, onInvite, enheter, existingIdents }: Omit<Props, 
               key={initials(name) || "?"}
               className="avatar"
               style={{ background: name ? avatarGradient(ident || name) : undefined, width: 52, height: 52, fontSize: "1.05rem" }}
-              initial={{ scale: 0.6, rotate: -20, opacity: 0 }}
-              animate={{ scale: 1, rotate: 0, opacity: 1 }}
-              transition={{ type: "spring", stiffness: 400, damping: 18 }}
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 320, damping: 26 }}
             >
               {initials(name) || "?"}
             </motion.div>
@@ -107,7 +107,7 @@ function InviteForm({ onClose, onInvite, enheter, existingIdents }: Omit<Props, 
               <div className={styles.tagRow}>
                 <AnimatePresence initial={false}>
                   {roles.map((r) => (
-                    <motion.span key={r} initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.6 }}>
+                    <motion.span key={r} initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.85 }}>
                       <span className={styles.rolePill} style={{ "--role": ROLE_META[r].hex } as React.CSSProperties}>
                         {ROLE_LABELS[r]}
                       </span>

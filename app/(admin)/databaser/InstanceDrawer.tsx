@@ -101,10 +101,10 @@ export function InstanceDrawer({ inst, months, today, onClose }: Props) {
             <span className={styles.headChip} style={{ ["--c" as string]: meta.color }}>
               <i /> {inst.typeLabel} · {meta.short}
             </span>
-            <span className={styles.headChip} style={{ ["--c" as string]: inst.env === "prod-gcp" ? "#a78bfa" : "#94a3b8" }}>
+            <span className={styles.headChip} style={{ ["--c" as string]: inst.env === "prod-gcp" ? "#7d6aa5" : "#6f7785" }}>
               {inst.env}
             </span>
-            <span className={styles.headChip} style={{ ["--c" as string]: inst.status === "RUNNABLE" ? "#10b981" : "#f59e0b" }}>
+            <span className={styles.headChip} style={{ ["--c" as string]: inst.status === "RUNNABLE" ? "#3a8a5f" : "#c98a2b" }}>
               {inst.status}
             </span>
           </div>
@@ -112,14 +112,14 @@ export function InstanceDrawer({ inst, months, today, onClose }: Props) {
             <span className={`dot ${inst.status === "RUNNABLE" ? "dot--ok dot--pulse" : "dot--warn"}`} />
             {inst.name}
           </div>
-          <div style={{ opacity: 0.75, fontSize: "0.88rem", position: "relative", zIndex: 1 }}>
+          <div className="muted" style={{ fontSize: "0.88rem", position: "relative", zIndex: 1 }}>
             {inst.namespace} · {inst.region} · {inst.tier} ({inst.vcpu} vCPU, {fmtDec(inst.memoryGb)} GB RAM)
           </div>
           <div className={styles.drawerStats}>
             <div className={styles.drawerStat}>
               <div>Brukt disk</div>
               <div>
-                {fmtGb(inst.usedGb)} <span style={{ opacity: 0.6, fontSize: "0.8rem" }}>/ {inst.diskGb}</span>
+                {fmtGb(inst.usedGb)} <span className="muted" style={{ fontSize: "0.8rem", fontWeight: 500 }}>/ {inst.diskGb}</span>
               </div>
             </div>
             <div className={styles.drawerStat}>
@@ -132,7 +132,7 @@ export function InstanceDrawer({ inst, months, today, onClose }: Props) {
             <div className={styles.drawerStat}>
               <div>Tilkoblinger</div>
               <div>
-                {inst.connections} <span style={{ opacity: 0.6, fontSize: "0.8rem" }}>/ {inst.maxConnections}</span>
+                {inst.connections} <span className="muted" style={{ fontSize: "0.8rem", fontWeight: 500 }}>/ {inst.maxConnections}</span>
               </div>
             </div>
             <div className={styles.drawerStat}>
@@ -161,7 +161,7 @@ export function InstanceDrawer({ inst, months, today, onClose }: Props) {
                 <ComposedChart data={sizeData} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
                   <defs>
                     <linearGradient id="drawerSize" x1="0" x2="0" y1="0" y2="1">
-                      <stop offset="0%" stopColor={inst.appColor} stopOpacity={0.45} />
+                      <stop offset="0%" stopColor={inst.appColor} stopOpacity={0.28} />
                       <stop offset="100%" stopColor={inst.appColor} stopOpacity={0} />
                     </linearGradient>
                   </defs>
@@ -169,8 +169,8 @@ export function InstanceDrawer({ inst, months, today, onClose }: Props) {
                   <XAxis dataKey="label" tickLine={false} axisLine={false} interval={2} />
                   <YAxis tickLine={false} axisLine={false} unit=" GB" width={70} domain={[0, yMax]} ticks={yTicks} />
                   <Tooltip content={<ChartTooltip formatter={(v) => fmtGb(v)} />} />
-                  <ReferenceLine y={inst.diskGb} stroke="#e11d48" strokeDasharray="6 4" label={{ value: `Diskgrense ${inst.diskGb} GB`, position: "insideTopLeft", fill: "#e11d48", fontSize: 11 }} />
-                  <Area type="monotone" dataKey="faktisk" name="Faktisk" stroke={inst.appColor} strokeWidth={2.5} fill="url(#drawerSize)" connectNulls={false} />
+                  <ReferenceLine y={inst.diskGb} stroke="#c4505c" strokeDasharray="6 4" label={{ value: `Diskgrense ${inst.diskGb} GB`, position: "insideTopLeft", fill: "#c4505c", fontSize: 11 }} />
+                  <Area type="monotone" dataKey="faktisk" name="Faktisk" stroke={inst.appColor} strokeWidth={2} fill="url(#drawerSize)" connectNulls={false} />
                   <Line type="monotone" dataKey="prognose" name="Prognose" stroke={inst.appColor} strokeWidth={2} strokeDasharray="5 5" dot={false} connectNulls={false} />
                 </ComposedChart>
               </ResponsiveContainer>
@@ -183,16 +183,16 @@ export function InstanceDrawer({ inst, months, today, onClose }: Props) {
                 <AreaChart data={connData} margin={{ top: 6, right: 10, left: -18, bottom: 0 }}>
                   <defs>
                     <linearGradient id="drawerConn" x1="0" x2="0" y1="0" y2="1">
-                      <stop offset="0%" stopColor="#06b6d4" stopOpacity={0.4} />
-                      <stop offset="100%" stopColor="#06b6d4" stopOpacity={0} />
+                      <stop offset="0%" stopColor="#3f8f8a" stopOpacity={0.25} />
+                      <stop offset="100%" stopColor="#3f8f8a" stopOpacity={0} />
                     </linearGradient>
                   </defs>
                   <CartesianGrid vertical={false} strokeDasharray="3 3" />
                   <XAxis dataKey="label" tickLine={false} axisLine={false} interval={3} />
                   <YAxis tickLine={false} axisLine={false} />
                   <Tooltip content={<ChartTooltip formatter={(v, n) => (n === "CPU" ? `${fmtInt(v)} %` : fmtInt(v))} />} />
-                  <Area type="monotone" dataKey="tilkoblinger" name="Tilkoblinger" stroke="#06b6d4" strokeWidth={2} fill="url(#drawerConn)" />
-                  <Area type="monotone" dataKey="cpu" name="CPU" stroke="#a855f7" strokeWidth={1.5} fill="none" strokeDasharray="4 3" />
+                  <Area type="monotone" dataKey="tilkoblinger" name="Tilkoblinger" stroke="#3f8f8a" strokeWidth={2} fill="url(#drawerConn)" />
+                  <Area type="monotone" dataKey="cpu" name="CPU" stroke="#7d6aa5" strokeWidth={1.5} fill="none" strokeDasharray="4 3" />
                 </AreaChart>
               </ResponsiveContainer>
             </Card>

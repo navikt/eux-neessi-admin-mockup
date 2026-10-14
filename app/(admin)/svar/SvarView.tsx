@@ -4,7 +4,6 @@ import {
   BellIcon,
   ExternalLinkIcon,
   FilterIcon,
-  HourglassIcon,
   PersonIcon,
   XMarkIcon,
 } from "@navikt/aksel-icons";
@@ -53,19 +52,19 @@ interface Props {
   teams: Record<string, string[]>;
 }
 
-const STATUS_COLOR: Record<AwaitingStatus, string> = { FORFALT: "#f43f5e", SNART: "#f59e0b", OK: "#10b981" };
+const STATUS_COLOR: Record<AwaitingStatus, string> = { FORFALT: "#c4505c", SNART: "#c98a2b", OK: "#3a8a5f" };
 const STATUS_LABEL: Record<AwaitingStatus, string> = { FORFALT: "Forfalt", SNART: "Snart frist", OK: "Innen frist" };
 const STATUS_TAG: Record<AwaitingStatus, "danger" | "warning" | "success"> = { FORFALT: "danger", SNART: "warning", OK: "success" };
 
 const AGING = [
-  { key: "a", label: "> 30 d igjen", test: (d: number) => d > 30, color: "#10b981" },
-  { key: "b", label: "8–30 d igjen", test: (d: number) => d > 7 && d <= 30, color: "#34d399" },
-  { key: "c", label: "0–7 d igjen", test: (d: number) => d >= 0 && d <= 7, color: "#f59e0b" },
-  { key: "d", label: "1–14 d over", test: (d: number) => d < 0 && d >= -14, color: "#fb7185" },
-  { key: "e", label: "15–30 d over", test: (d: number) => d < -14 && d >= -30, color: "#f43f5e" },
-  { key: "f", label: "31–60 d over", test: (d: number) => d < -30 && d >= -60, color: "#e11d48" },
-  { key: "g", label: "61–120 d over", test: (d: number) => d < -60 && d >= -120, color: "#be123c" },
-  { key: "h", label: "> 120 d over", test: (d: number) => d < -120, color: "#881337" },
+  { key: "a", label: "> 30 d igjen", test: (d: number) => d > 30, color: "#3a8a5f" },
+  { key: "b", label: "8–30 d igjen", test: (d: number) => d > 7 && d <= 30, color: "#6fb38c" },
+  { key: "c", label: "0–7 d igjen", test: (d: number) => d >= 0 && d <= 7, color: "#c98a2b" },
+  { key: "d", label: "1–14 d over", test: (d: number) => d < 0 && d >= -14, color: "#d98a92" },
+  { key: "e", label: "15–30 d over", test: (d: number) => d < -14 && d >= -30, color: "#c4505c" },
+  { key: "f", label: "31–60 d over", test: (d: number) => d < -30 && d >= -60, color: "#b23a48" },
+  { key: "g", label: "61–120 d over", test: (d: number) => d < -60 && d >= -120, color: "#9c2f3c" },
+  { key: "h", label: "> 120 d over", test: (d: number) => d < -120, color: "#6e2430" },
 ];
 
 type SortKey = "frist" | "sed" | "land" | "sektor" | "enhet" | "saksbehandler" | "paaminnelser" | "mottatt";
@@ -202,11 +201,7 @@ export function SvarView({ items, map, todayIso, initial, teams }: Props) {
     <>
       <PageHero
         variant="sunset"
-        eyebrow={
-          <>
-            <HourglassIcon aria-hidden style={{ marginRight: 6 }} /> Svarfrister
-          </>
-        }
+        eyebrow="Svarfrister"
         title="Har vi svart de andre landene?"
         lead={
           <>
@@ -265,11 +260,13 @@ export function SvarView({ items, map, todayIso, initial, teams }: Props) {
                 <span className="muted">
                   {fmtInt(filtered.length)} treff ·
                 </span>
-                {activeFilters.map((a) => (
-                  <button key={a.key} className={styles.activeChip} onClick={() => clearFilter(a.key)}>
-                    {a.label} <XMarkIcon aria-hidden />
-                  </button>
-                ))}
+                <Chips size="small">
+                  {activeFilters.map((a) => (
+                    <Chips.Removable key={a.key} data-color="accent" onDelete={() => clearFilter(a.key)}>
+                      {a.label}
+                    </Chips.Removable>
+                  ))}
+                </Chips>
                 <Button size="xsmall" variant="tertiary" onClick={() => update({ status: "ALLE", land: null, sektor: null, enhet: null, q: "" })}>
                   Nullstill
                 </Button>
@@ -295,7 +292,7 @@ export function SvarView({ items, map, todayIso, initial, teams }: Props) {
             <EuropeMap
               map={map}
               values={mapValues}
-              palette={f.status === "OK" ? ["#bbf7d0", "#10b981", "#065f46"] : f.status === "SNART" ? ["#fde68a", "#f59e0b", "#92400e"] : ["#fecdd3", "#f43f5e", "#881337"]}
+              palette={f.status === "OK" ? ["#d6eadc", "#3a8a5f", "#24563c"] : f.status === "SNART" ? ["#ecdcb0", "#c98a2b", "#7d5418"] : ["#efd3d5", "#c4505c", "#6e2430"]}
               selected={(f.land as CountryCode) ?? null}
               onSelect={(c) => update({ land: c })}
               tooltip={(code) => {
@@ -365,9 +362,9 @@ export function SvarView({ items, map, todayIso, initial, teams }: Props) {
                 <CartesianGrid vertical={false} strokeDasharray="3 3" />
                 <XAxis dataKey="label" tickLine={false} axisLine={false} fontSize={12} interval={0} />
                 <YAxis tickLine={false} axisLine={false} />
-                <ReTooltip cursor={{ fill: "rgba(99,102,241,0.06)" }} content={<ChartTooltip formatter={(v) => `${fmtInt(v)} forespørsler`} />} />
-                <ReferenceLine x="1–14 d over" stroke="#f43f5e" strokeDasharray="4 4" label={{ value: "Frist", position: "top", fill: "#f43f5e", fontWeight: 700, fontSize: 12 }} />
-                <Bar dataKey="count" name="Antall" radius={[8, 8, 0, 0]} animationDuration={900}>
+                <ReTooltip cursor={{ fill: "rgba(111, 119, 133, 0.08)" }} content={<ChartTooltip formatter={(v) => `${fmtInt(v)} forespørsler`} />} />
+                <ReferenceLine x="1–14 d over" stroke="#c4505c" strokeDasharray="4 4" label={{ value: "Frist", position: "top", fill: "#c4505c", fontWeight: 600, fontSize: 12 }} />
+                <Bar dataKey="count" name="Antall" radius={[6, 6, 0, 0]} animationDuration={900}>
                   {aging.map((a) => (
                     <Cell key={a.key} fill={a.color} />
                   ))}
@@ -419,7 +416,7 @@ export function SvarView({ items, map, todayIso, initial, teams }: Props) {
                         <div className={styles.fristCell}>
                           <span className={styles.fristBar} style={{ background: STATUS_COLOR[i.status] }} />
                           <div>
-                            <div style={{ fontWeight: 700, color: i.status === "OK" ? undefined : STATUS_COLOR[i.status] }}>
+                            <div style={{ fontWeight: 600, fontVariantNumeric: "tabular-nums", color: i.status === "OK" ? undefined : STATUS_COLOR[i.status] }}>
                               {i.daysLeft < 0 ? `${-i.daysLeft} d over` : i.daysLeft === 0 ? "I dag" : `${i.daysLeft} d igjen`}
                             </div>
                             <div className="muted" style={{ fontSize: "0.78rem" }}>{fmtDateShort(i.fristIso)}</div>
@@ -478,7 +475,7 @@ export function SvarView({ items, map, todayIso, initial, teams }: Props) {
                 })}
               </Table.Body>
             </Table>
-            {!pageItems.length ? <div className="empty">Ingen forespørsler matcher filteret. 🎉</div> : null}
+            {!pageItems.length ? <div className="empty">Ingen forespørsler matcher filteret.</div> : null}
           </div>
           <div className={styles.pager}>
             <span className="muted">
@@ -572,10 +569,10 @@ function Insights({ list, assigned }: { list: AwaitingItem[]; assigned: Record<s
   const reminded = overdue.filter((i) => i.reminders > 0).length;
   const veryOld = overdue.filter((i) => i.daysLeft < -60).length;
   const rows = [
-    { label: "Mangler saksbehandler", value: unassigned, color: "#f59e0b", hint: "Ingen eier – fordel dem" },
-    { label: "Har mottatt purring (X009)", value: reminded, color: "#f43f5e", hint: "Landet har etterlyst svar" },
-    { label: "Mer enn 60 dager over frist", value: veryOld, color: "#881337", hint: "Kan være glemt eller feilrutet" },
-    { label: "Svarutkast påbegynt", value: drafts, color: "#10b981", hint: "Nesten i mål" },
+    { label: "Mangler saksbehandler", value: unassigned, color: "#c98a2b", hint: "Ingen eier – fordel dem" },
+    { label: "Har mottatt purring (X009)", value: reminded, color: "#c4505c", hint: "Landet har etterlyst svar" },
+    { label: "Mer enn 60 dager over frist", value: veryOld, color: "#6f7785", hint: "Kan være glemt eller feilrutet" },
+    { label: "Svarutkast påbegynt", value: drafts, color: "#3a8a5f", hint: "Nesten i mål" },
   ];
   const total = Math.max(1, overdue.length);
   return (
@@ -584,7 +581,7 @@ function Insights({ list, assigned }: { list: AwaitingItem[]; assigned: Record<s
         <div key={r.label}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
             <span style={{ fontWeight: 600 }}>{r.label}</span>
-            <span style={{ fontWeight: 800, fontSize: "1.2rem", color: r.color }}>{r.value}</span>
+            <span style={{ fontWeight: 600, fontSize: "1.2rem", fontVariantNumeric: "tabular-nums", color: r.color }}>{r.value}</span>
           </div>
           <div className="bar-track" style={{ margin: "6px 0 2px" }}>
             <motion.div
@@ -625,15 +622,15 @@ function DetailModal({
   const country = COUNTRY_BY_CODE[item.country];
   const enhet = ENHET_BY_ID[item.enhetId];
   const events: { date: string; title: string; body?: string; color: string; done: boolean }[] = [
-    { date: item.receivedIso, title: `${item.sedType} mottatt`, body: `${item.institution}, ${country.name}`, color: "#2563eb", done: true },
+    { date: item.receivedIso, title: `${item.sedType} mottatt`, body: `${item.institution}, ${country.name}`, color: "#2a6cb3", done: true },
   ];
-  if (item.saksbehandler) events.push({ date: addDaysIso(item.receivedIso, 2), title: "Tildelt saksbehandler", body: item.saksbehandler, color: "#7c3aed", done: true });
-  if (item.draftStarted) events.push({ date: addDaysIso(item.receivedIso, Math.min(item.daysWaiting, 6)), title: `Utkast til ${item.replySed} påbegynt`, body: "Lagret i nEESSI", color: "#10b981", done: true });
-  events.push({ date: item.fristIso, title: "Svarfrist", body: `${item.fristDager} dager etter mottak`, color: "#f43f5e", done: item.daysLeft < 0 });
+  if (item.saksbehandler) events.push({ date: addDaysIso(item.receivedIso, 2), title: "Tildelt saksbehandler", body: item.saksbehandler, color: "#7d6aa5", done: true });
+  if (item.draftStarted) events.push({ date: addDaysIso(item.receivedIso, Math.min(item.daysWaiting, 6)), title: `Utkast til ${item.replySed} påbegynt`, body: "Lagret i nEESSI", color: "#3a8a5f", done: true });
+  events.push({ date: item.fristIso, title: "Svarfrist", body: `${item.fristDager} dager etter mottak`, color: "#c4505c", done: item.daysLeft < 0 });
   for (let r = 0; r < item.reminders; r++) {
-    events.push({ date: addDaysIso(item.fristIso, 7 + r * 21), title: `Påminnelse X009 nr. ${r + 1}`, body: `Fra ${item.institution}`, color: "#f59e0b", done: true });
+    events.push({ date: addDaysIso(item.fristIso, 7 + r * 21), title: `Påminnelse X009 nr. ${r + 1}`, body: `Fra ${item.institution}`, color: "#c98a2b", done: true });
   }
-  events.push({ date: todayIso, title: "I dag", body: item.daysLeft < 0 ? `${-item.daysLeft} dager over fristen` : `${item.daysLeft} dager igjen`, color: "#0f172a", done: true });
+  events.push({ date: todayIso, title: "I dag", body: item.daysLeft < 0 ? `${-item.daysLeft} dager over fristen` : `${item.daysLeft} dager igjen`, color: "var(--ax-text-neutral)", done: true });
   events.sort((a, b) => a.date.localeCompare(b.date));
 
   return (
@@ -662,7 +659,7 @@ function DetailModal({
               {enhet?.name} <span className="muted mono">({item.enhetId})</span>
             </dd>
             <dt>Saksbehandler</dt>
-            <dd>{assignedTo ?? <span style={{ color: "#f59e0b", fontWeight: 600 }}>Ikke tildelt</span>}</dd>
+            <dd>{assignedTo ?? <span style={{ color: "#c98a2b", fontWeight: 600 }}>Ikke tildelt</span>}</dd>
             <dt>Mottatt</dt>
             <dd>{fmtDate(item.receivedIso)}</dd>
             <dt>Frist</dt>
@@ -673,7 +670,7 @@ function DetailModal({
               <motion.li key={`${e.title}-${i}`} initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.05 * i }}>
                 <span className={styles.tlDot} style={{ background: e.done ? e.color : "transparent", borderColor: e.color }} />
                 <div>
-                  <div style={{ fontWeight: 650 }}>{e.title}</div>
+                  <div style={{ fontWeight: 600 }}>{e.title}</div>
                   <div className="muted" style={{ fontSize: "0.8rem" }}>
                     {fmtDate(e.date)}
                     {e.body ? ` · ${e.body}` : ""}

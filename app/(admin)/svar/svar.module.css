@@ -15,27 +15,6 @@
   margin-left: auto;
 }
 
-.activeChip {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  border: none;
-  border-radius: 999px;
-  padding: 3px 8px 3px 10px;
-  font: inherit;
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  color: #fff;
-  background: linear-gradient(120deg, var(--brand-a), var(--brand-b));
-  transition: transform 0.15s, box-shadow 0.15s;
-}
-
-.activeChip:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 14px -6px var(--brand-b);
-}
-
 .countryList {
   display: grid;
   gap: 2px;
@@ -49,7 +28,7 @@
   padding: 7px 8px;
   border: none;
   background: transparent;
-  border-radius: 10px;
+  border-radius: 8px;
   font: inherit;
   color: inherit;
   text-align: left;
@@ -105,7 +84,7 @@
   padding: 6px 8px;
   border: none;
   background: transparent;
-  border-radius: 10px;
+  border-radius: 8px;
   font: inherit;
   color: inherit;
   cursor: pointer;
@@ -136,7 +115,7 @@
 
 .hbarTrack {
   flex: 1;
-  height: 16px;
+  height: 14px;
 }
 
 .hbarFill {
@@ -192,8 +171,9 @@
   display: inline-flex;
   align-items: center;
   gap: 3px;
-  font-weight: 700;
-  color: #f59e0b;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: #c98a2b;
 }
 
 .pager {
@@ -285,6 +265,6 @@
   gap: 10px;
   margin-top: 20px;
   padding: 12px 14px;
-  border-radius: var(--radius-md);
-  background: var(--ax-bg-neutral-soft, #f1f5f9);
+  border-radius: 10px;
+  background: var(--ax-bg-neutral-soft);
 }

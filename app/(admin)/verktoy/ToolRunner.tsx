@@ -213,9 +213,8 @@ export function ToolRunner<R>({
             <div className={styles.runningHead}>
               <motion.span
                 className={styles.runningOrb}
-                style={{ background: tool.color }}
-                animate={{ scale: [1, 1.18, 1], opacity: [0.9, 1, 0.9] }}
-                transition={{ duration: 1.4, repeat: Infinity }}
+                animate={{ scale: [1, 1.05, 1], opacity: [0.85, 1, 0.85] }}
+                transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
               >
                 <tool.icon aria-hidden />
               </motion.span>
@@ -283,7 +282,7 @@ export function ToolRunner<R>({
           }}
           header={{
             heading: confirm.heading,
-            icon: <ExclamationmarkTriangleFillIcon aria-hidden color={tool.risk === "høy" ? "#e11d48" : "#d97706"} />,
+            icon: <ExclamationmarkTriangleFillIcon aria-hidden color={tool.risk === "høy" ? "#c4505c" : "#c98a2b"} />,
           }}
           width={540}
           closeOnBackdropClick
@@ -376,9 +375,9 @@ function ResultBanner({ status, headline, durationMs }: { status: RunStatus; hea
     <div className={styles.resultBanner} data-status={status}>
       <motion.span
         className={styles.resultIcon}
-        initial={{ scale: 0, rotate: -40 }}
-        animate={{ scale: 1, rotate: 0 }}
-        transition={{ type: "spring", stiffness: 260, damping: 14, delay: 0.1 }}
+        initial={{ scale: 0.6, rotate: -12, opacity: 0 }}
+        animate={{ scale: 1, rotate: 0, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 260, damping: 22, delay: 0.1 }}
       >
         <Icon aria-hidden />
       </motion.span>
@@ -397,10 +396,9 @@ export function ToolHeader({ tool, onClose }: { tool: ToolDefinition; onClose?: 
     <div className={styles.toolHeader}>
       <motion.span
         className={styles.toolHeaderIcon}
-        style={{ background: `linear-gradient(135deg, ${tool.color}, color-mix(in srgb, ${tool.color} 55%, #0b1c4a))` }}
-        initial={{ rotate: -14, scale: 0.7 }}
-        animate={{ rotate: 0, scale: 1 }}
-        transition={{ type: "spring", stiffness: 240, damping: 16 }}
+        initial={{ rotate: -8, scale: 0.85, opacity: 0 }}
+        animate={{ rotate: 0, scale: 1, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 240, damping: 24 }}
       >
         <tool.icon aria-hidden />
       </motion.span>

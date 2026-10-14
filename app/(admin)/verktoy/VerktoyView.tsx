@@ -135,15 +135,15 @@ export function VerktoyView({ initialToolId, initialAudit, nowMs, userName }: Pr
         lead="Trygge, sporbare verktøy for de tingene vi før gjorde med curl og SQL. Hver kjøring valideres, bekreftes og logges."
         actions={
           <>
-            <Button className={styles.heroPrimary} icon={<PaperplaneIcon aria-hidden />} onClick={() => select("publiser-sed-hendelser")}>
+            <Button variant="primary" size="small" icon={<PaperplaneIcon aria-hidden />} onClick={() => select("publiser-sed-hendelser")}>
               Publiser SED-hendelser
             </Button>
             <Button
-              variant="tertiary"
+              variant="secondary"
               data-color="neutral"
+              size="small"
               icon={<ClockDashedIcon aria-hidden />}
               onClick={() => document.getElementById("kjorehistorikk")?.scrollIntoView({ behavior: "smooth" })}
-              className={styles.heroGhost}
             >
               Kjørehistorikk
             </Button>

@@ -12,7 +12,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   return (
     <div className="shell">
-      <Sidebar badges={{ overdue: summary.overdue }} />
+      <Sidebar badges={{ overdue: summary.overdue }} user={user} />
       <div className="shell__main">
         <Topbar user={user} />
         <main id="main" className="shell__content">

@@ -135,7 +135,7 @@ export function Heatmap({ features, enheter, categoryColor, focusId, onFocus }: 
         <span>Lite brukt</span>
         <span className={styles.heatScale}>
           {[0.08, 0.3, 0.55, 0.8, 1].map((lv) => (
-            <span key={lv} style={{ background: `color-mix(in srgb, #64748b ${Math.round(12 + lv * 88)}%, var(--card-bg))` }} />
+            <span key={lv} style={{ background: `color-mix(in srgb, #6f7785 ${Math.round(12 + lv * 88)}%, var(--card-bg))` }} />
           ))}
         </span>
         <span>Mye brukt</span>

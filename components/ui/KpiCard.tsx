@@ -18,12 +18,12 @@ interface Props {
   foot?: React.ReactNode;
 }
 
-export function KpiCard({ label, value, decimals = 0, suffix, icon: Icon, color = "#6366f1", delta, invertDelta, deltaLabel, spark, foot }: Props) {
+export function KpiCard({ label, value, decimals = 0, suffix, icon: Icon, color = "#2f6fb5", delta, invertDelta, deltaLabel, spark, foot }: Props) {
   const good = delta === undefined ? true : invertDelta ? delta <= 0 : delta >= 0;
   return (
     <div className="card card--interactive kpi">
       {Icon ? (
-        <div className="kpi__icon" style={{ background: `linear-gradient(135deg, ${color}, color-mix(in srgb, ${color} 55%, #000))`, boxShadow: `0 10px 20px -10px ${color}` }}>
+        <div className="kpi__icon" style={{ background: `color-mix(in srgb, ${color} 12%, transparent)`, color }}>
           <Icon aria-hidden />
         </div>
       ) : null}

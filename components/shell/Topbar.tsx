@@ -3,15 +3,17 @@
 import { ChevronRightIcon, MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { findNavItem } from "@/lib/nav";
+import { NAV, findNavItem } from "@/lib/nav";
 import type { SessionUser } from "@/lib/session";
 import { CommandPalette } from "./CommandPalette";
 import { ThemeToggle } from "./ThemeToggle";
+import { OPEN_SEARCH_EVENT } from "./useSidebar";
 import { UserMenu } from "./UserMenu";
 
 export function Topbar({ user }: { user: SessionUser }) {
   const pathname = usePathname();
   const item = findNavItem(pathname);
+  const group = NAV.find((g) => g.items.some((i) => i.href === item?.href));
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -21,28 +23,34 @@ export function Topbar({ user }: { user: SessionUser }) {
         setOpen((o) => !o);
       }
     };
+    const onOpen = () => setOpen(true);
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    window.addEventListener(OPEN_SEARCH_EVENT, onOpen);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener(OPEN_SEARCH_EVENT, onOpen);
+    };
   }, []);
 
   return (
     <header className="topbar">
       <div className="topbar__crumbs">
-        <span>nEESSI admin</span>
+        <span>{group?.label ?? "nEESSI admin"}</span>
         <ChevronRightIcon aria-hidden />
         <strong>{item?.label ?? "Side"}</strong>
+        {item ? <span className="topbar__desc hide-sm">{item.description}</span> : null}
       </div>
       <div className="topbar__spacer" />
-      <button type="button" className="search-trigger hide-sm" onClick={() => setOpen(true)}>
+      <button type="button" className="search-trigger show-mobile" onClick={() => setOpen(true)} aria-label="Søk">
         <MagnifyingGlassIcon aria-hidden fontSize="1.1rem" />
-        Søk eller hopp til …
-        <span className="kbd">⌘ K</span>
       </button>
       <span className="env-pill" title="Alle data i denne prototypen er fiktive">
-        <span className="dot dot--warn" /> Prototype · fiktive data
+        <span className="dot dot--warn" style={{ width: 7, height: 7, boxShadow: "none" }} /> Prototype · fiktive data
       </span>
       <ThemeToggle />
-      <UserMenu user={user} />
+      <span className="show-mobile">
+        <UserMenu user={user} />
+      </span>
       <CommandPalette open={open} onClose={() => setOpen(false)} />
     </header>
   );

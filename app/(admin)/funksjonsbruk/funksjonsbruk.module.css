@@ -2,18 +2,17 @@
 
 .heroOf {
   font-size: 1.1rem;
-  opacity: 0.7;
-  font-weight: 600;
+  color: var(--muted);
+  font-weight: 500;
 }
 
 .heroNewest {
   display: block;
+  font-family: var(--font-display);
   font-size: 1.35rem;
+  font-weight: 600;
   line-height: 1.35;
-  background: linear-gradient(90deg, #fff, #a5f3fc);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--ax-text-neutral);
 }
 
 /* ---------- Filters ---------- */
@@ -56,7 +55,7 @@
 
 .spotActive {
   border-color: var(--accent) !important;
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent), var(--card-shadow-hover) !important;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 18%, transparent), var(--card-shadow-hover) !important;
 }
 
 .spotGlow {
@@ -65,13 +64,13 @@
   width: 260px;
   height: 260px;
   border-radius: 50%;
-  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 28%, transparent), transparent 65%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 10%, transparent), transparent 65%);
   pointer-events: none;
   transition: transform 0.6s ease;
 }
 
 .spot:hover .spotGlow {
-  transform: translate(-20px, 20px) scale(1.15);
+  transform: translate(-16px, 16px) scale(1.05);
 }
 
 .spotTop {
@@ -87,7 +86,7 @@
   align-items: center;
   gap: 6px;
   font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
@@ -95,38 +94,14 @@
 
 .verdict {
   display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 12px;
-  border-radius: 999px;
-  font-size: 0.82rem;
-  font-weight: 750;
-  white-space: nowrap;
-}
-
-.verdictUp {
-  color: #fff;
-  background: linear-gradient(120deg, #059669, #10b981 50%, #34d399);
-  box-shadow: 0 8px 18px -8px rgba(16, 185, 129, 0.9);
-}
-
-.verdictMid {
-  color: #fff;
-  background: linear-gradient(120deg, #4f46e5, #6366f1 50%, #818cf8);
-  box-shadow: 0 8px 18px -8px rgba(99, 102, 241, 0.9);
-}
-
-.verdictLow {
-  color: #78350f;
-  background: linear-gradient(120deg, #fbbf24, #fcd34d);
-  box-shadow: 0 8px 18px -8px rgba(245, 158, 11, 0.9);
 }
 
 .spotName {
   position: relative;
-  font-size: 1.3rem;
-  font-weight: 750;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   margin-top: 6px;
 }
 
@@ -147,13 +122,11 @@
 
 .spotPct {
   font-size: 2.6rem;
-  font-weight: 800;
-  letter-spacing: -0.04em;
+  font-weight: 600;
+  letter-spacing: -0.03em;
   line-height: 1;
-  background: linear-gradient(120deg, var(--accent), color-mix(in srgb, var(--accent) 50%, #ec4899));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 82%, var(--ax-text-neutral));
 }
 
 .spotPctLabel {
@@ -193,11 +166,12 @@
   min-width: 22px;
   height: 22px;
   padding: 0 6px;
-  border-radius: 7px;
-  font-weight: 750;
+  border-radius: 6px;
+  font-weight: 600;
   font-size: 0.8rem;
-  color: #fff;
-  background: var(--accent);
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--accent) 80%, var(--ax-text-neutral));
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
 }
 
 /* ---------- Leaderboard ---------- */
@@ -245,27 +219,30 @@
   place-items: center;
   width: 26px;
   height: 26px;
-  border-radius: 8px;
-  font-weight: 750;
+  border-radius: 7px;
+  font-weight: 600;
   font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
   background: var(--ax-bg-neutral-soft);
   color: var(--muted);
 }
 
 .rank1 {
-  background: linear-gradient(135deg, #fde047, #f59e0b);
-  color: #78350f;
-  box-shadow: 0 6px 14px -6px #f59e0b;
+  background: color-mix(in srgb, #c49a3c 16%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, #c49a3c 35%, transparent);
+  color: color-mix(in srgb, #c49a3c 72%, var(--ax-text-neutral));
 }
 
 .rank2 {
-  background: linear-gradient(135deg, #e2e8f0, #94a3b8);
-  color: #1e293b;
+  background: color-mix(in srgb, #6f7785 14%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, #6f7785 30%, transparent);
+  color: var(--ax-text-neutral);
 }
 
 .rank3 {
-  background: linear-gradient(135deg, #fdba74, #c2410c);
-  color: #fff;
+  background: color-mix(in srgb, #c0765d 14%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, #c0765d 32%, transparent);
+  color: color-mix(in srgb, #c0765d 75%, var(--ax-text-neutral));
 }
 
 .featureCell {
@@ -329,7 +306,7 @@
 }
 
 .deltaNew {
-  background: linear-gradient(120deg, rgba(16, 185, 129, 0.18), rgba(14, 165, 233, 0.18));
+  background: color-mix(in srgb, #3a8a5f 14%, transparent);
 }
 
 /* ---------- Side panel ---------- */
@@ -339,9 +316,9 @@
 }
 
 .focusPanel {
-  border-color: color-mix(in srgb, var(--accent) 45%, var(--card-border));
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--card-border));
   background:
-    radial-gradient(420px 200px at 100% 0%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%),
+    radial-gradient(420px 200px at 100% 0%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 70%),
     var(--card-bg);
 }
 
@@ -358,14 +335,31 @@
   align-items: flex-start;
   gap: 2px;
   padding: 8px 10px;
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   background: var(--ax-bg-neutral-soft);
   font-size: 0.75rem;
 }
 
 .focusStats strong {
   font-size: 1.2rem;
-  font-weight: 750;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.focusStats > div {
+  min-width: 0;
+}
+
+.focusStats > div > span:first-child {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.focusStats :global(.delta) {
+  white-space: nowrap;
+  margin-top: 3px;
 }
 
 .focusEnheter {
@@ -376,11 +370,11 @@
 }
 
 .focusEnheterHead {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--kicker);
 }
 
 .focusEnhetRow {
@@ -416,7 +410,7 @@
 
 .unusedChips > span {
   padding: 3px 9px;
-  border-radius: 999px;
+  border-radius: 6px;
   font-size: 0.78rem;
   color: var(--muted);
   border: 1px dashed var(--card-border);
@@ -464,7 +458,7 @@
   width: 100%;
   padding: 7px 8px;
   border: none;
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   background: transparent;
   font: inherit;
   font-size: 0.9rem;
@@ -493,7 +487,7 @@
   gap: 10px;
   margin-top: 12px;
   padding: 10px 14px;
-  border-radius: 14px;
+  border-radius: var(--radius-md);
   font-size: 0.86rem;
   color: var(--muted);
   border: 1px dashed var(--card-border);
@@ -502,7 +496,7 @@
 .hintBox svg {
   flex-shrink: 0;
   font-size: 1.3rem;
-  color: #14b8a6;
+  color: #3f8f8a;
   animation: nudge 2.2s ease-in-out infinite;
 }
 
@@ -519,7 +513,7 @@
 /* ---------- Stacked area ---------- */
 
 .focusLine path {
-  filter: drop-shadow(0 2px 4px rgba(249, 115, 22, 0.5));
+  filter: none;
 }
 
 /* ---------- Dormant ---------- */
@@ -542,8 +536,8 @@
   gap: 6px;
   width: 100%;
   padding: 12px 14px;
-  border-radius: 14px;
-  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--hairline);
   background: var(--ax-bg-neutral-soft);
   font: inherit;
   color: inherit;
@@ -554,13 +548,15 @@
 
 .dormantItem:hover {
   transform: translateY(-1px);
-  border-color: color-mix(in srgb, #f59e0b 45%, var(--card-border));
-  box-shadow: 0 10px 22px -16px rgba(245, 158, 11, 0.8);
+  border-color: var(--card-border);
+  background: var(--card-bg);
+  box-shadow: var(--card-shadow-hover);
 }
 
 .dormantActive {
-  border-color: #f97316;
-  box-shadow: 0 0 0 3px color-mix(in srgb, #f97316 22%, transparent);
+  border-color: color-mix(in srgb, #c0765d 55%, var(--card-border));
+  background: var(--card-bg);
+  box-shadow: 0 0 0 2px color-mix(in srgb, #c0765d 16%, transparent);
 }
 
 .dormantHead {
@@ -575,9 +571,9 @@
 
 .zzz {
   position: relative;
-  font-weight: 800;
+  font-weight: 600;
   font-size: 0.8rem;
-  color: #94a3b8;
+  color: var(--muted);
   width: 22px;
 }
 
@@ -640,17 +636,17 @@
   display: flex;
   gap: 8px;
   padding: 8px 10px;
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   font-size: 0.82rem;
   line-height: 1.35;
-  background: color-mix(in srgb, #f59e0b 10%, var(--card-bg));
-  border: 1px solid color-mix(in srgb, #f59e0b 25%, transparent);
+  background: color-mix(in srgb, #c98a2b 8%, var(--card-bg));
+  border: 1px solid color-mix(in srgb, #c98a2b 20%, transparent);
 }
 
 .suggestion svg {
   flex-shrink: 0;
   margin-top: 2px;
-  color: #d97706;
+  color: color-mix(in srgb, #c98a2b 80%, var(--ax-text-neutral));
 }
 
 /* ---------- Heatmap ---------- */
@@ -692,7 +688,7 @@
 }
 
 .heatHead .mono {
-  font-weight: 700;
+  font-weight: 600;
   color: var(--ax-text-neutral);
 }
 
@@ -706,7 +702,7 @@
   gap: 8px;
   padding: 0 10px;
   border: none;
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   background: transparent;
   font: inherit;
   font-size: 0.88rem;
@@ -723,8 +719,8 @@
 }
 
 .heatLabelOn {
-  background: color-mix(in srgb, #f97316 12%, transparent);
-  box-shadow: inset 3px 0 0 #f97316;
+  background: color-mix(in srgb, #c0765d 11%, transparent);
+  box-shadow: inset 2px 0 0 #c0765d;
 }
 
 .heatCell {
@@ -733,7 +729,7 @@
   height: 34px;
   border-radius: 8px;
   font-size: 0.74rem;
-  font-weight: 650;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
   cursor: pointer;
   transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.3s ease, filter 0.3s ease, outline-color 0.15s ease;
@@ -752,9 +748,9 @@
 }
 
 .heatCellOn {
-  transform: scale(1.12);
+  transform: scale(1.06);
   z-index: 2;
-  box-shadow: 0 10px 22px -10px rgba(15, 23, 42, 0.55);
+  box-shadow: var(--card-shadow-hover);
   outline-color: var(--ax-text-neutral);
 }
 
@@ -764,19 +760,19 @@
   translate: -50% calc(-100% - 10px);
   min-width: 240px;
   padding: 12px 14px;
-  border-radius: 14px;
+  border-radius: var(--radius-md);
   font-size: 0.84rem;
   pointer-events: none;
   background: var(--ax-bg-raised, #fff);
   border: 1px solid var(--card-border);
-  box-shadow: 0 18px 40px -16px rgba(15, 23, 42, 0.45);
+  box-shadow: var(--card-shadow-hover);
 }
 
 .heatTipTitle {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .heatLegend {
@@ -832,13 +828,13 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 8px 8px 16px;
-  border-radius: 999px;
-  color: #fff;
+  padding: 6px 6px 6px 16px;
+  border-radius: var(--radius-lg);
+  color: var(--ax-text-neutral);
   white-space: nowrap;
-  background: linear-gradient(120deg, rgba(4, 47, 46, 0.94), rgba(17, 94, 89, 0.94));
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 24px 50px -16px rgba(13, 148, 136, 0.65), 0 2px 6px rgba(0, 0, 0, 0.2);
+  background: color-mix(in srgb, var(--card-bg) 94%, transparent);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow-hover);
   backdrop-filter: blur(14px);
 }
 
@@ -849,31 +845,31 @@
 }
 
 .focusBarDot {
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 35%, transparent);
-  animation: pulse 1.8s ease-in-out infinite;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+  animation: pulse 2.2s ease-in-out infinite;
 }
 
 @keyframes pulse {
   50% {
-    box-shadow: 0 0 0 7px color-mix(in srgb, var(--accent) 10%, transparent);
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 6%, transparent);
   }
 }
 
 .focusBarLabel {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  opacity: 0.65;
+  color: var(--kicker);
 }
 
 .focusBarMeta {
   font-size: 0.84rem;
-  opacity: 0.75;
+  color: var(--muted);
 }
 
 .focusBarClose {
@@ -881,26 +877,28 @@
   align-items: center;
   gap: 6px;
   margin-left: 6px;
-  padding: 6px 8px 6px 12px;
+  padding: 6px 8px 6px 10px;
   border: none;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   font: inherit;
   font-size: 0.86rem;
-  font-weight: 600;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.12);
+  font-weight: 550;
+  color: var(--ax-text-neutral);
+  background: var(--ax-bg-neutral-soft);
   cursor: pointer;
   transition: background 0.15s ease;
 }
 
 .focusBarClose:hover {
-  background: rgba(255, 255, 255, 0.22);
+  background: var(--ax-bg-neutral-moderate, color-mix(in srgb, var(--muted) 16%, transparent));
 }
 
 .focusBarClose kbd {
   padding: 1px 6px;
-  border-radius: 6px;
-  font: inherit;
+  border-radius: 5px;
+  font-family: var(--font-mono);
   font-size: 0.7rem;
-  background: rgba(255, 255, 255, 0.16);
+  color: var(--muted);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
 }

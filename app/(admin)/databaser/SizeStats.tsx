@@ -33,18 +33,17 @@ function TreeCell({ x = 0, y = 0, width = 0, height = 0, name, size, color, dept
   if (depth !== 1) return null;
   const showName = width > 70 && height > 34;
   const showSize = width > 50 && height > 52;
-  const r = Math.max(2, Math.min(10, width / 5, height / 5));
+  const r = Math.max(2, Math.min(8, width / 5, height / 5));
   return (
     <g>
-      <rect x={x + 2} y={y + 2} width={Math.max(0, width - 4)} height={Math.max(0, height - 4)} rx={r} ry={r} fill={color} fillOpacity={0.9} />
-      <rect x={x + 2} y={y + 2} width={Math.max(0, width - 4)} height={Math.max(0, height - 4)} rx={r} ry={r} fill="url(#treeShine)" />
+      <rect x={x + 2} y={y + 2} width={Math.max(0, width - 4)} height={Math.max(0, height - 4)} rx={r} ry={r} fill={color} fillOpacity={0.82} />
       {showName ? (
-        <text x={x + 12} y={y + 22} fill="#fff" fontSize={width > 150 ? 13 : 11} fontWeight={700} style={{ fontFamily: "var(--font-mono)" }}>
+        <text x={x + 12} y={y + 22} fill="#fff" fontSize={width > 150 ? 13 : 11} fontWeight={600} style={{ fontFamily: "var(--font-mono)" }}>
           {name && name.length * 7 > width - 20 ? `${name.slice(0, Math.max(3, Math.floor((width - 24) / 7)))}…` : name}
         </text>
       ) : null}
       {showSize && size !== undefined ? (
-        <text x={x + 12} y={y + (width > 150 ? 46 : 40)} fill="#fff" fillOpacity={0.85} fontSize={width > 150 ? 20 : 13} fontWeight={800}>
+        <text x={x + 12} y={y + (width > 150 ? 46 : 40)} fill="#fff" fillOpacity={0.9} fontSize={width > 150 ? 20 : 13} fontWeight={600} style={{ fontVariantNumeric: "tabular-nums" }}>
           {fmtGb(size)}
         </text>
       ) : null}
@@ -106,8 +105,8 @@ export function SizeStats({ instances, months, apps, onSelect }: Props) {
                 <defs>
                   {ordered.map((a) => (
                     <linearGradient key={a.app} id={`stack-${a.app}`} x1="0" x2="0" y1="0" y2="1">
-                      <stop offset="0%" stopColor={a.color} stopOpacity={0.85} />
-                      <stop offset="100%" stopColor={a.color} stopOpacity={0.35} />
+                      <stop offset="0%" stopColor={a.color} stopOpacity={0.75} />
+                      <stop offset="100%" stopColor={a.color} stopOpacity={0.3} />
                     </linearGradient>
                   ))}
                 </defs>
@@ -150,7 +149,7 @@ export function SizeStats({ instances, months, apps, onSelect }: Props) {
                   <div className="bar-track" style={{ height: 6 }}>
                     <motion.div
                       className="bar-fill"
-                      style={{ width: `${(Math.abs(g.perMonth) / maxGrowth) * 100}%`, background: g.perMonth < 0 ? "#94a3b8" : g.color, transformOrigin: "left" }}
+                      style={{ width: `${(Math.abs(g.perMonth) / maxGrowth) * 100}%`, background: g.perMonth < 0 ? "#9aa1ab" : g.color, transformOrigin: "left" }}
                       initial={{ scaleX: 0 }}
                       whileInView={{ scaleX: 1 }}
                       viewport={{ once: true }}
@@ -190,12 +189,6 @@ export function SizeStats({ instances, months, apps, onSelect }: Props) {
                 }}
                 style={{ cursor: "pointer" }}
               >
-                <defs>
-                  <linearGradient id="treeShine" x1="0" x2="1" y1="0" y2="1">
-                    <stop offset="0%" stopColor="#fff" stopOpacity={0.22} />
-                    <stop offset="100%" stopColor="#000" stopOpacity={0.12} />
-                  </linearGradient>
-                </defs>
                 <Tooltip content={<ChartTooltip formatter={(v) => fmtGb(v)} />} />
               </Treemap>
             </ResponsiveContainer>
@@ -207,7 +200,7 @@ export function SizeStats({ instances, months, apps, onSelect }: Props) {
               {proj.map((i, idx) => {
                 const d = i.daysUntilFull ?? 0;
                 const frac = Math.min(1, d / horizonDays);
-                const color = d < 183 ? "#e11d48" : d < 365 ? "#f97316" : "#10b981";
+                const color = d < 183 ? "#b23a48" : d < 365 ? "#b8743e" : "#3a8a5f";
                 return (
                   <div key={i.id} className={styles.projRow} onClick={() => onSelect(i.id)}>
                     <div className={styles.projName} title={i.name}>

@@ -42,7 +42,7 @@ export function ToolCard({ tool, lastRun, runs30d, now, favorite, selected, comp
       initial={{ opacity: 0, scale: 0.96 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.92 }}
-      whileHover={compact ? { x: 3 } : { y: -4 }}
+      whileHover={compact ? { x: 2 } : { y: -2 }}
       transition={{ type: "spring", stiffness: 320, damping: 30 }}
     >
       {selected ? <motion.span layoutId="tool-selected-ring" className={styles.toolCardRing} transition={{ type: "spring", stiffness: 380, damping: 32 }} /> : null}
@@ -70,9 +70,9 @@ export function ToolCard({ tool, lastRun, runs30d, now, favorite, selected, comp
             e.stopPropagation();
             onToggleFavorite();
           }}
-          whileTap={{ scale: 0.7, rotate: -30 }}
+          whileTap={{ scale: 0.85, rotate: -12 }}
         >
-          <motion.span key={String(favorite)} initial={{ scale: 0.4, rotate: -90 }} animate={{ scale: 1, rotate: 0 }} transition={{ type: "spring", stiffness: 500, damping: 15 }}>
+          <motion.span key={String(favorite)} initial={{ scale: 0.6, rotate: -36 }} animate={{ scale: 1, rotate: 0 }} transition={{ type: "spring", stiffness: 420, damping: 24 }}>
             {favorite ? <StarFillIcon aria-hidden /> : <StarIcon aria-hidden />}
           </motion.span>
         </motion.button>

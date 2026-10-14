@@ -131,12 +131,12 @@ export function UpgradePlanModal({ rec, instances, onClose, onDone }: Props) {
       <Modal.Body>
         <div className={styles.versionJump} style={{ marginBottom: 16 }}>
           {rec.fromVersions.map((v) => (
-            <span key={v} className={styles.vchip} style={{ background: HEALTH_META[list.find((i) => i.version === v)?.health ?? "ok"].color }}>
+            <span key={v} className={styles.vchip} style={{ ["--c" as string]: HEALTH_META[list.find((i) => i.version === v)?.health ?? "ok"].color }}>
               POSTGRES_{v}
             </span>
           ))}
           <ArrowRightIcon aria-hidden />
-          <span className={styles.vchip} style={{ background: "#10b981" }}>
+          <span className={styles.vchip} style={{ ["--c" as string]: "#3a8a5f" }}>
             POSTGRES_{rec.target}
           </span>
           <span className="muted" style={{ fontWeight: 500 }}>

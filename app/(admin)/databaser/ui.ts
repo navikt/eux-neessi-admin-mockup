@@ -1,16 +1,16 @@
 import type { DbInstance, Env, Priority, VersionHealth } from "./data";
 
 export const HEALTH_META: Record<VersionHealth, { label: string; short: string; color: string; tag: "danger" | "warning" | "success" | "info" }> = {
-  eol: { label: "Utgått (EOL)", short: "EOL", color: "#e11d48", tag: "danger" },
-  soon: { label: "EOL innen 6 mnd", short: "Snart EOL", color: "#f97316", tag: "warning" },
-  ok: { label: "Støttet", short: "OK", color: "#10b981", tag: "success" },
-  newest: { label: "Nyeste versjon", short: "Nyest", color: "#3b82f6", tag: "info" },
+  eol: { label: "Utgått (EOL)", short: "EOL", color: "#b23a48", tag: "danger" },
+  soon: { label: "EOL innen 6 mnd", short: "Snart EOL", color: "#b8743e", tag: "warning" },
+  ok: { label: "Støttet", short: "OK", color: "#3a8a5f", tag: "success" },
+  newest: { label: "Nyeste versjon", short: "Nyest", color: "#4a84c4", tag: "info" },
 };
 
 export const PRIORITY_META: Record<Priority, { label: string; color: string; tag: "danger" | "warning" | "neutral" }> = {
-  kritisk: { label: "Kritisk", color: "#e11d48", tag: "danger" },
-  hoy: { label: "Høy", color: "#f97316", tag: "warning" },
-  planlegg: { label: "Planlegg", color: "#64748b", tag: "neutral" },
+  kritisk: { label: "Kritisk", color: "#b23a48", tag: "danger" },
+  hoy: { label: "Høy", color: "#b8743e", tag: "warning" },
+  planlegg: { label: "Planlegg", color: "#6f7785", tag: "neutral" },
 };
 
 export const ENV_LABEL: Record<Env, string> = { "prod-gcp": "prod-gcp", "dev-gcp": "dev-gcp" };
@@ -61,9 +61,9 @@ export function diskPct(i: DbInstance): number {
 }
 
 export function diskColor(pct: number): string {
-  if (pct >= 85) return "#e11d48";
-  if (pct >= 70) return "#f97316";
-  return "#10b981";
+  if (pct >= 85) return "#b23a48";
+  if (pct >= 70) return "#b8743e";
+  return "#3a8a5f";
 }
 
 export function variantLabel(i: DbInstance): string | null {

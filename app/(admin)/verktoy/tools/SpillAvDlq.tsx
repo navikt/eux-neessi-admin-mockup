@@ -206,7 +206,7 @@ export function SpillAvDlq({ tool, onRunComplete }: ToolComponentProps) {
           </Table>
           {visible.length === 0 ? (
             <div className="empty">
-              <CheckmarkIcon aria-hidden fontSize="2rem" color="#10b981" />
+              <CheckmarkIcon aria-hidden fontSize="2rem" color="#3a8a5f" />
               <div>DLQ for {group} er tom</div>
             </div>
           ) : null}

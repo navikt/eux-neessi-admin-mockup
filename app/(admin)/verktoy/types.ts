@@ -48,12 +48,12 @@ export interface AuditEntry extends RunRecord {
 export const CATEGORIES: ToolCategory[] = ["Kafka", "RINA", "Journalføring", "Opprydding", "Cache", "Katalog"];
 
 export const CATEGORY_COLOR: Record<ToolCategory, string> = {
-  Kafka: "#7c3aed",
-  RINA: "#2563eb",
-  Journalføring: "#0891b2",
-  Opprydding: "#e11d48",
-  Cache: "#d97706",
-  Katalog: "#059669",
+  Kafka: "#6e5a9e",
+  RINA: "#2a6cb3",
+  Journalføring: "#35787a",
+  Opprydding: "#b23a48",
+  Cache: "#b07320",
+  Katalog: "#2f7a52",
 };
 
 export const RISK_META: Record<RiskLevel, { label: string; color: "success" | "warning" | "danger"; hint: string }> = {

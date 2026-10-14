@@ -216,15 +216,17 @@ export function StatistikkView({ stats, map, initialLand, initialPeriode, initia
           </>
         }
         actions={
-          <Button
-            size="small"
-            variant="secondary-neutral"
-            icon={<DownloadIcon aria-hidden />}
-            className={styles.heroBtn}
-            onClick={() => push("Rapport generert", `«EESSI-statistikk ${periodLabel.toLowerCase()}» er lastet ned som PDF.`)}
-          >
-            Last ned rapport
-          </Button>
+          <span className={styles.heroAction}>
+            <Button
+              size="small"
+              variant="secondary"
+              data-color="neutral"
+              icon={<DownloadIcon aria-hidden />}
+              onClick={() => push("Rapport generert", `«EESSI-statistikk ${periodLabel.toLowerCase()}» er lastet ned som PDF.`)}
+            >
+              Last ned rapport
+            </Button>
+          </span>
         }
       >
         <HeroStat label="SED-er sendt" value={<CountUp value={totals.sent} />} hint={prevTotals ? <Delta v={pctChange(totals.sent, prevTotals.sent)} /> : "fra Norge"} />
@@ -289,7 +291,7 @@ export function StatistikkView({ stats, map, initialLand, initialPeriode, initia
         title="Europakartet sett fra Oslo"
         lead="Sverige, Polen og Danmark dominerer – naboland og arbeidsinnvandring setter preg på utvekslingen. Klikk på et land for å se forholdet vårt til det."
         actions={
-          <ToggleGroup size="small" value={metric} onChange={(v) => setMetric(v as MapMetric)} label="">
+          <ToggleGroup size="small" value={metric} onChange={(v) => setMetric(v as MapMetric)} label="" className={styles.noWrapToggle}>
             <ToggleGroup.Item value="total" label="Totalt" />
             <ToggleGroup.Item value="sent" label="Sendt" />
             <ToggleGroup.Item value="recv" label="Mottatt" />
@@ -305,7 +307,7 @@ export function StatistikkView({ stats, map, initialLand, initialPeriode, initia
               selected={land}
               onSelect={setLand}
               flows={land ? 0 : 8}
-              palette={metric === "sent" ? ["#bfdbfe", "#2563eb", "#1e3a8a"] : metric === "recv" ? ["#a7f3d0", "#10b981", "#064e3b"] : metric === "balance" ? ["#fde68a", "#f97316", "#7c2d12"] : ["#c7d2fe", "#6366f1", "#312e81"]}
+              palette={metric === "sent" ? ["#cddcee", "#2a6cb3", "#1d3f66"] : metric === "recv" ? ["#cfe6d7", "#3a8a5f", "#24563c"] : metric === "balance" ? ["#ecdcb0", "#b8743e", "#5e3518"] : ["#c3d6ee", "#2f6fb5", "#1f3550"]}
               tooltip={(code) => {
                 const c = byCountry.find((x) => x.code === code);
                 if (!c) return null;
@@ -335,8 +337,8 @@ export function StatistikkView({ stats, map, initialLand, initialPeriode, initia
                     </Button>
                   </div>
                   <div className={styles.profileStats}>
-                    <ProfileStat label="Sendt" value={fmtInt(selected.sent)} color="#2563eb" />
-                    <ProfileStat label="Mottatt" value={fmtInt(selected.recv)} color="#10b981" />
+                    <ProfileStat label="Sendt" value={fmtInt(selected.sent)} color="#2a6cb3" />
+                    <ProfileStat label="Mottatt" value={fmtInt(selected.recv)} color="#3a8a5f" />
                     <ProfileStat label="Vi svarer på" value={fmtDays(selected.nDays)} />
                     <ProfileStat label="De svarer på" value={fmtDays(selected.tDays)} />
                     <ProfileStat label="Vi innen frist" value={fmtPct(selected.nOnTime)} />
@@ -389,14 +391,14 @@ export function StatistikkView({ stats, map, initialLand, initialPeriode, initia
                               whileInView={{ width: `${(c.sent / max) * 100}%` }}
                               viewport={{ once: true }}
                               transition={{ duration: 0.8, delay: i * 0.04 }}
-                              style={{ background: "#2563eb" }}
+                              style={{ background: "#2a6cb3" }}
                             />
                             <motion.span
                               initial={{ width: 0 }}
                               whileInView={{ width: `${(c.recv / max) * 100}%` }}
                               viewport={{ once: true }}
                               transition={{ duration: 0.8, delay: i * 0.04 + 0.1 }}
-                              style={{ background: "#10b981" }}
+                              style={{ background: "#3a8a5f" }}
                             />
                           </span>
                           <span className={styles.rankNum}>{fmtCompact(c.sent + c.recv)}</span>
@@ -428,8 +430,8 @@ export function StatistikkView({ stats, map, initialLand, initialPeriode, initia
               <defs>
                 {SECTORS.map((s) => (
                   <linearGradient key={s.code} id={`g-${s.code}`} x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor={s.color} stopOpacity={0.85} />
-                    <stop offset="100%" stopColor={s.color} stopOpacity={0.35} />
+                    <stop offset="0%" stopColor={s.color} stopOpacity={0.6} />
+                    <stop offset="100%" stopColor={s.color} stopOpacity={0.22} />
                   </linearGradient>
                 ))}
               </defs>
@@ -437,7 +439,7 @@ export function StatistikkView({ stats, map, initialLand, initialPeriode, initia
               <XAxis dataKey="label" tickLine={false} axisLine={false} />
               <YAxis tickLine={false} axisLine={false} tickFormatter={(v: number) => fmtCompact(v)} width={52} />
               <ReTooltip content={<ChartTooltip formatter={(v) => fmtInt(v)} />} />
-              <ReferenceArea x1={highlight.from} x2={highlight.to} fill="#6366f1" fillOpacity={0.06} stroke="#6366f1" strokeOpacity={0.25} strokeDasharray="4 4" />
+              <ReferenceArea x1={highlight.from} x2={highlight.to} fill="#2f6fb5" fillOpacity={0.06} stroke="#2f6fb5" strokeOpacity={0.25} strokeDasharray="4 4" />
               {visibleSectors.map((s) => (
                 <Area key={s.code} type="monotone" dataKey={s.code} name={s.name} stackId="1" stroke={s.color} strokeWidth={1.5} fill={`url(#g-${s.code})`} animationDuration={900} />
               ))}
@@ -474,7 +476,7 @@ export function StatistikkView({ stats, map, initialLand, initialPeriode, initia
                 {visibleSectors.map((s) => (
                   <Line key={s.code} type="monotone" dataKey={s.code} name={s.name} stroke={s.color} strokeWidth={1.5} dot={false} strokeOpacity={0.75} />
                 ))}
-                <Line type="monotone" dataKey="alle" name="Alle sektorer" stroke="#0f172a" strokeWidth={3.5} dot={{ r: 3 }} className={styles.allLine} />
+                <Line type="monotone" dataKey="alle" name="Alle sektorer" stroke="#202733" strokeWidth={2.5} dot={{ r: 2.5 }} className={styles.allLine} />
               </LineChart>
             </ResponsiveContainer>
           </Card>
@@ -483,16 +485,16 @@ export function StatistikkView({ stats, map, initialLand, initialPeriode, initia
               <AreaChart data={responseTrend} margin={{ top: 10, right: 6, left: -18, bottom: 0 }}>
                 <defs>
                   <linearGradient id="fristFill" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#10b981" stopOpacity={0.5} />
-                    <stop offset="100%" stopColor="#10b981" stopOpacity={0.02} />
+                    <stop offset="0%" stopColor="#3a8a5f" stopOpacity={0.3} />
+                    <stop offset="100%" stopColor="#3a8a5f" stopOpacity={0.02} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid vertical={false} strokeDasharray="3 3" />
                 <XAxis dataKey="label" tickLine={false} axisLine={false} fontSize={11} />
                 <YAxis tickLine={false} axisLine={false} domain={[70, 100]} unit="%" fontSize={11} />
                 <ReTooltip content={<ChartTooltip formatter={(v) => fmtPct(v)} />} />
-                <ReferenceLine y={90} stroke="#f59e0b" strokeDasharray="4 4" label={{ value: "Mål 90 %", position: "insideBottomRight", fill: "#f59e0b", fontSize: 11 }} />
-                <Area type="monotone" dataKey="frist" name="Innen frist" stroke="#10b981" strokeWidth={2.5} fill="url(#fristFill)" />
+                <ReferenceLine y={90} stroke="#c98a2b" strokeDasharray="4 4" label={{ value: "Mål 90 %", position: "insideBottomRight", fill: "#c98a2b", fontSize: 11 }} />
+                <Area type="monotone" dataKey="frist" name="Innen frist" stroke="#3a8a5f" strokeWidth={2.5} fill="url(#fristFill)" />
               </AreaChart>
             </ResponsiveContainer>
             <div className={styles.bigFact}>
@@ -514,11 +516,11 @@ export function StatistikkView({ stats, map, initialLand, initialPeriode, initia
           <ResponsiveContainer width="100%" height={460}>
             <ScatterChart margin={{ top: 20, right: 30, left: 10, bottom: 20 }}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis type="number" dataKey="x" name="Norge svarer" unit=" d" domain={[0, scatterMax]} tickLine={false} label={{ value: "Norge svarer (dager)", position: "insideBottom", offset: -10, fontSize: 12, fill: "#64748b" }} />
-              <YAxis type="number" dataKey="y" name="De svarer" unit=" d" domain={[0, scatterMax]} tickLine={false} label={{ value: "De svarer (dager)", angle: -90, position: "insideLeft", fontSize: 12, fill: "#64748b" }} />
+              <XAxis type="number" dataKey="x" name="Norge svarer" unit=" d" domain={[0, scatterMax]} tickLine={false} label={{ value: "Norge svarer (dager)", position: "insideBottom", offset: -10, fontSize: 12, fill: "#6f7785" }} />
+              <YAxis type="number" dataKey="y" name="De svarer" unit=" d" domain={[0, scatterMax]} tickLine={false} label={{ value: "De svarer (dager)", angle: -90, position: "insideLeft", fontSize: 12, fill: "#6f7785" }} />
               <ZAxis type="number" dataKey="z" range={[80, 1600]} />
               <ReferenceArea x1={0} x2={scatterMax} y1={0} y2={scatterMax} fill="transparent" />
-              <ReferenceLine segment={[{ x: 0, y: 0 }, { x: scatterMax, y: scatterMax }]} stroke="#94a3b8" strokeDasharray="6 6" />
+              <ReferenceLine segment={[{ x: 0, y: 0 }, { x: scatterMax, y: scatterMax }]} stroke="#9aa1ab" strokeDasharray="6 6" />
               <ReTooltip
                 cursor={{ strokeDasharray: "3 3" }}
                 content={({ active, payload }) => {
@@ -546,8 +548,8 @@ export function StatistikkView({ stats, map, initialLand, initialPeriode, initia
                   const active = land === payload.code;
                   return (
                     <g style={{ cursor: "pointer" }}>
-                      <circle cx={cx} cy={cy} r={r} fill={slower ? "#f97316" : "#6366f1"} fillOpacity={active ? 0.9 : 0.35} stroke={slower ? "#f97316" : "#6366f1"} strokeWidth={active ? 3 : 1.5} />
-                      <text x={cx} y={cy + 4} textAnchor="middle" fontSize={r > 14 ? 11 : 9} fontWeight={700} fill={active ? "#fff" : "currentColor"} className={styles.bubbleText}>
+                      <circle cx={cx} cy={cy} r={r} fill={slower ? "#b8743e" : "#2f6fb5"} fillOpacity={active ? 0.9 : 0.35} stroke={slower ? "#b8743e" : "#2f6fb5"} strokeWidth={active ? 3 : 1.5} />
+                      <text x={cx} y={cy + 4} textAnchor="middle" fontSize={r > 14 ? 11 : 9} fontWeight={600} fill={active ? "#fff" : "currentColor"} className={styles.bubbleText}>
                         {payload.code}
                       </text>
                     </g>
@@ -558,10 +560,10 @@ export function StatistikkView({ stats, map, initialLand, initialPeriode, initia
           </ResponsiveContainer>
           <div className="legend" style={{ justifyContent: "center" }}>
             <span className="legend__item">
-              <span className="legend__swatch" style={{ background: "#f97316" }} /> Tregere enn Norge
+              <span className="legend__swatch" style={{ background: "#b8743e" }} /> Tregere enn Norge
             </span>
             <span className="legend__item">
-              <span className="legend__swatch" style={{ background: "#6366f1" }} /> Raskere enn Norge
+              <span className="legend__swatch" style={{ background: "#2f6fb5" }} /> Raskere enn Norge
             </span>
             <span className="legend__item muted">Boblestørrelse = volum</span>
           </div>
@@ -613,7 +615,7 @@ export function StatistikkView({ stats, map, initialLand, initialPeriode, initia
                   {fmtDays(e.days)}
                 </span>
                 <span style={{ textAlign: "right" }}>
-                  <span className={styles.onTime} style={{ ["--c" as string]: e.onTime >= 92 ? "#10b981" : e.onTime >= 85 ? "#f59e0b" : "#f43f5e" }}>
+                  <span className={styles.onTime} style={{ ["--c" as string]: e.onTime >= 92 ? "#3a8a5f" : e.onTime >= 85 ? "#c98a2b" : "#c4505c" }}>
                     {fmtPct(e.onTime)}
                   </span>
                 </span>
@@ -631,10 +633,10 @@ export function StatistikkView({ stats, map, initialLand, initialPeriode, initia
                 <CartesianGrid horizontal={false} strokeDasharray="3 3" />
                 <XAxis type="number" tickLine={false} axisLine={false} tickFormatter={(v: number) => fmtCompact(v)} />
                 <YAxis type="category" dataKey="type" tickLine={false} axisLine={false} width={56} tick={{ fontFamily: "var(--font-mono)", fontSize: 12 }} />
-                <ReTooltip content={<ChartTooltip labelFormatter={(l) => `${l} – ${SED_BY_TYPE[String(l)]?.name ?? ""}`} formatter={(v) => fmtInt(v)} />} cursor={{ fill: "rgba(99,102,241,0.06)" }} />
+                <ReTooltip content={<ChartTooltip labelFormatter={(l) => `${l} – ${SED_BY_TYPE[String(l)]?.name ?? ""}`} formatter={(v) => fmtInt(v)} />} cursor={{ fill: "rgba(111, 119, 133, 0.08)" }} />
                 <Legend wrapperStyle={{ fontSize: 12 }} />
-                <Bar dataKey="sent" name="Sendt" stackId="a" fill="#2563eb" />
-                <Bar dataKey="recv" name="Mottatt" stackId="a" fill="#10b981" radius={[0, 6, 6, 0]} />
+                <Bar dataKey="sent" name="Sendt" stackId="a" fill="#2a6cb3" />
+                <Bar dataKey="recv" name="Mottatt" stackId="a" fill="#3a8a5f" radius={[0, 6, 6, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </Card>
@@ -681,7 +683,7 @@ function HeatRow({ day, row, max, index }: { day: string; row: number[]; max: nu
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ delay: index * 0.05 + h * 0.012 }}
-          style={{ background: `color-mix(in srgb, #6366f1 ${Math.round(Math.pow(v / max, 0.7) * 100)}%, var(--heat-empty))` }}
+          style={{ background: `color-mix(in srgb, #2f6fb5 ${Math.round(Math.pow(v / max, 0.7) * 100)}%, var(--heat-empty))` }}
         />
       ))}
     </>
@@ -694,7 +696,7 @@ function ProfileStat({ label, value, color }: { label: string; value: string; co
       <div className="muted" style={{ fontSize: "0.8rem" }}>
         {label}
       </div>
-      <div style={{ fontWeight: 750, fontSize: "1.25rem", color }}>{value}</div>
+      <div style={{ fontWeight: 600, fontSize: "1.25rem", fontVariantNumeric: "tabular-nums", color }}>{value}</div>
     </div>
   );
 }
@@ -702,7 +704,7 @@ function ProfileStat({ label, value, color }: { label: string; value: string; co
 function Delta({ v, invert }: { v: number; invert?: boolean }) {
   const good = invert ? v <= 0 : v >= 0;
   return (
-    <span style={{ fontWeight: 700, color: good ? "#a7f3d0" : "#fecdd3" }}>
+    <span style={{ fontWeight: 600, color: good ? "var(--ax-text-success)" : "var(--ax-text-danger)" }}>
       {v >= 0 ? "▲" : "▼"} {fmtDec(Math.abs(v))} % mot forrige periode
     </span>
   );

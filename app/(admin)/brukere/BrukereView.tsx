@@ -258,10 +258,10 @@ export function BrukereView({ initialUsers, enheter, currentUser, todayIso }: Pr
         variant="violet"
         actions={
           <>
-            <Button className={styles.heroButton} icon={<PersonPlusIcon aria-hidden />} onClick={() => setInviteOpen(true)}>
+            <Button size="small" variant="primary" icon={<PersonPlusIcon aria-hidden />} onClick={() => setInviteOpen(true)}>
               Inviter bruker
             </Button>
-            <Button className={styles.heroGhost} variant="secondary" icon={<DownloadIcon aria-hidden />} onClick={() => toast({ variant: "info", title: "Eksport startet", body: `${filtered.length} brukere eksporteres til CSV` })}>
+            <Button size="small" variant="secondary" data-color="neutral" icon={<DownloadIcon aria-hidden />} onClick={() => toast({ variant: "info", title: "Eksport startet", body: `${filtered.length} brukere eksporteres til CSV` })}>
               Eksporter
             </Button>
           </>
@@ -275,16 +275,16 @@ export function BrukereView({ initialUsers, enheter, currentUser, todayIso }: Pr
 
       <Stagger className="grid grid--4">
         <StaggerItem>
-          <KpiCard label="Registrerte brukere" value={stats.total} icon={PersonGroupIcon} color="#8b5cf6" spark={stats.growth} deltaLabel="vekst siden 2021" />
+          <KpiCard label="Registrerte brukere" value={stats.total} icon={PersonGroupIcon} color="#7d6aa5" spark={stats.growth} deltaLabel="vekst siden 2021" />
         </StaggerItem>
         <StaggerItem>
-          <KpiCard label="Snitt daglig aktive" value={stats.dau} icon={PersonCheckmarkIcon} color="#10b981" spark={stats.dailyUsers} deltaLabel="siste 30 dager" />
+          <KpiCard label="Snitt daglig aktive" value={stats.dau} icon={PersonCheckmarkIcon} color="#3a8a5f" spark={stats.dailyUsers} deltaLabel="siste 30 dager" />
         </StaggerItem>
         <StaggerItem>
-          <KpiCard label="Økter siste 30 dager" value={stats.sessions} icon={ShieldCheckmarkIcon} color="#0ea5e9" spark={stats.dailySessions} deltaLabel={`${stats.avgSessions.toLocaleString("nb-NO", { maximumFractionDigits: 1 })} per aktiv bruker`} />
+          <KpiCard label="Økter siste 30 dager" value={stats.sessions} icon={ShieldCheckmarkIcon} color="#457c9d" spark={stats.dailySessions} deltaLabel={`${stats.avgSessions.toLocaleString("nb-NO", { maximumFractionDigits: 1 })} per aktiv bruker`} />
         </StaggerItem>
         <StaggerItem>
-          <KpiCard label="SED-er sendt siste 30 dager" value={stats.seds} icon={PaperplaneIcon} color="#ec4899" spark={stats.dailySessions.map((v, i) => v * (3 + ((i * 7) % 5)))} deltaLabel="fra saksbehandlerne" />
+          <KpiCard label="SED-er sendt siste 30 dager" value={stats.seds} icon={PaperplaneIcon} color="#c0765d" spark={stats.dailySessions.map((v, i) => v * (3 + ((i * 7) % 5)))} deltaLabel="fra saksbehandlerne" />
         </StaggerItem>
       </Stagger>
 
@@ -586,7 +586,7 @@ export function BrukereView({ initialUsers, enheter, currentUser, todayIso }: Pr
                             <span className="bar-track" style={{ width: 70 }}>
                               <span
                                 className="bar-fill"
-                                style={{ width: `${(u.sessions30d / maxSessions) * 100}%`, background: "linear-gradient(90deg, #8b5cf6, #ec4899)" }}
+                                style={{ width: `${(u.sessions30d / maxSessions) * 100}%`, background: "linear-gradient(90deg, color-mix(in srgb, #457c9d 55%, transparent), #457c9d)" }}
                               />
                             </span>
                             <span className="tabular">{u.sessions30d}</span>
@@ -618,19 +618,19 @@ export function BrukereView({ initialUsers, enheter, currentUser, todayIso }: Pr
         {selected.length > 0 ? (
           <motion.div
             className={styles.bulkBar}
-            initial={{ y: 120, opacity: 0, scale: 0.9 }}
+            initial={{ y: 80, opacity: 0, scale: 0.97 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
-            exit={{ y: 120, opacity: 0, scale: 0.9 }}
+            exit={{ y: 80, opacity: 0, scale: 0.97 }}
             transition={{ type: "spring", stiffness: 420, damping: 32 }}
           >
-            <motion.span key={selected.length} className={styles.bulkCount} initial={{ scale: 1.4 }} animate={{ scale: 1 }}>
+            <motion.span key={selected.length} className={styles.bulkCount} initial={{ scale: 1.12 }} animate={{ scale: 1 }}>
               {selected.length}
             </motion.span>
             <span className={styles.bulkLabel}>valgt</span>
             <span className={styles.bulkDivider} />
             <ActionMenu>
               <ActionMenu.Trigger>
-                <Button size="small" variant="tertiary" className={styles.bulkBtn} icon={<ChevronDownIcon aria-hidden />} iconPosition="right">
+                <Button size="small" variant="tertiary" data-color="neutral" icon={<ChevronDownIcon aria-hidden />} iconPosition="right">
                   Endre rolle
                 </Button>
               </ActionMenu.Trigger>
@@ -652,14 +652,14 @@ export function BrukereView({ initialUsers, enheter, currentUser, todayIso }: Pr
                 </ActionMenu.Group>
               </ActionMenu.Content>
             </ActionMenu>
-            <Button size="small" variant="tertiary" className={styles.bulkBtn} icon={<BellIcon aria-hidden />} onClick={bulkRemind}>
+            <Button size="small" variant="tertiary" data-color="neutral" icon={<BellIcon aria-hidden />} onClick={bulkRemind}>
               Send påminnelse
             </Button>
-            <Button size="small" variant="tertiary" className={`${styles.bulkBtn} ${styles.bulkDanger}`} icon={<PersonCrossIcon aria-hidden />} onClick={bulkDeactivate}>
+            <Button size="small" variant="tertiary" data-color="danger" icon={<PersonCrossIcon aria-hidden />} onClick={bulkDeactivate}>
               Deaktiver
             </Button>
             <span className={styles.bulkDivider} />
-            <Button size="small" variant="tertiary" className={styles.bulkBtn} icon={<XMarkIcon aria-hidden />} onClick={() => setSelected([])} aria-label="Fjern valg" />
+            <Button size="small" variant="tertiary" data-color="neutral" icon={<XMarkIcon aria-hidden />} onClick={() => setSelected([])} aria-label="Fjern valg" />
           </motion.div>
         ) : null}
       </AnimatePresence>

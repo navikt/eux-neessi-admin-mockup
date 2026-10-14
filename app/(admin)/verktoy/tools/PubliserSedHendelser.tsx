@@ -378,7 +378,7 @@ function CellGrid({ cells }: { cells: Cell[] }) {
           className={styles.cell}
           data-state={c}
           initial={{ scale: 0.4, opacity: 0 }}
-          animate={{ scale: c === "pending" ? 1 : [1.35, 1], opacity: 1 }}
+          animate={{ scale: c === "pending" ? 1 : [1.12, 1], opacity: 1 }}
           transition={{ duration: 0.3, delay: c === "pending" ? i * 0.01 : 0 }}
         />
       ))}

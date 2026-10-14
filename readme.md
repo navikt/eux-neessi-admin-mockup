@@ -137,5 +137,7 @@ The app is built on GitHub and runs on **Nais**, the same way as the portal in `
 * **Build:** GitHub Actions (pnpm, Node 22) builds the app, then builds and pushes a Docker image
   (see `.github/workflows/portal-build-deploy.yaml`)
 * **Deploy:** the same workflow deploys to Nais in the `eessibasis` namespace, using a `.nais/` config
+* **URL:** https://eux-neessi-admin.intern.dev.nav.no/ (app name `eux-neessi-admin`, internal ingress only)
+* **Access:** the repo is authorized to deploy to Nais in the `eessibasis` team
 * **App:** a Next.js app with a Dockerfile and health/metrics endpoints (`/api/internal/health/live`,
   `/api/internal/health/ready`, `/api/internal/metrics`)

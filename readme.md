@@ -113,8 +113,7 @@ we want to know if someone is using it.
 * Uniform and pretty design across the web page
 * really dig into my requirements here, and follow them. but you may "merge" them into screens, create them in completely different ways etc. be creative.
 * this is a admin client, it will not have huge userbase, but is really important. good UX, pretty UX 
-* **Language:** the UI supports both Norwegian (bokmål) and English, with a language switch. Each language must be
-  complete and pretty — never a messy mix of the two on the same screen
+* **Language:** the UI supports Norwegian (bokmål) 
 * **Accessibility:** out of scope for this mockup. It takes shortcuts and only needs to look great for normal users.
   Universal design (WCAG) will be handled when we build the real client
 

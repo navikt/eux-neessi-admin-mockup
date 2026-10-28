@@ -1,6 +1,6 @@
 import "server-only";
 
-import { collectDefaultMetrics, Registry } from "prom-client";
+import { collectDefaultMetrics, Registry } from "@prometheus-io/client";
 
 declare global {
   var __NEESSI_ADMIN_METRICS_REGISTRY__: Registry | undefined;
